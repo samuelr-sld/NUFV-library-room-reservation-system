@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - National University</title>
+    <link rel="stylesheet" href="../register page/register.css">
+
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts for Clean Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="brand-header">
+            <div class="logo-badge">
+                <img src="../assets/NU_shield.svg" alt="Logo">
+            </div>
+                <div class="brand-text">
+                    <h1>NATIONAL UNIVERSITY</h1>
+                    <span>FAIRVIEW</span>
+                </div>
+            </div>
+    
+    <div class="bg-slider">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+    </div>
+
+    <div class="overlay"></div>
+    
+    <div class="container">
+    <h2>Create an account</h2>
+
+
+    <form class="register-form">
+            
+        <!-- Username Input -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <i class="fa fa-user input-icon"></i>
+              <input type="text" id="username" placeholder="Enter username (e.g. Juan Dela Cruz)" required>
+            </div>
+        </div>
+
+        <!-- student number Input -->
+        <div class="form-group">
+            <label for="student-number">Student number</label>
+            <div class="input-wrapper">
+              <i class="fa fa-id-card input-icon"></i>
+              <input type="text" id="student-num" placeholder="Enter student number (e.g. 2023-XXXX)" required>
+            </div>
+        </div>
+        
+        <!-- Student Email Input -->
+        <div class="form-group">
+            <label for="student-email">Email</label>
+            <div class="input-wrapper">
+              <i class="fa fa-envelope input-icon"></i>
+              <input type="email" id="student-email" placeholder="Enter your email" required>
+            </div>
+        </div>
+
+            <!-- Password Input -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Enter your password" required>
+              <i class="fa-regular fa-eye toggle-password"></i>
+            </div>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div class="form-group">
+            <label for="conf-password">Confirm password</label>
+            <div class="input-wrapper">
+              <i class="fa fa-check input-icon"></i>
+              <input type="password" id="password" placeholder="Re-enter password" required>
+              <i class="fa-regular fa-eye toggle-password"></i>
+            </div>
+        </div>
+
+        <label class="legal-text">
+            <input type="checkbox" class="legal-checkbox" />
+            <i class="fa fa-check-square checkbox-icon" aria-hidden="true"></i>
+            <span>
+                By creating an account, I have read, understood, and agree to the <a id="terms-link" href="../terms/terms.html">terms and conditions</a>.
+            </span>
+        </label>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">SUBMIT</button>
+        
+        <div class="login-divider">
+            <span class="login-link">ALREADY HAVE AN ACCOUNT? <a href="../login page/login.html">LOG IN</a></span>
+        </div>
+
+        </form>
+    </div>
+
+    <dialog class="terms-popup" id="terms-popup" aria-label="Terms and Conditions">
+        <button class="terms-popup-close" id="terms-popup-close" type="button" aria-label="Close terms">&times;</button>
+        <iframe src="../terms/terms.html" title="Terms and Conditions"></iframe>
+    </dialog>
+
+<script src="login.js"></script>
+<script>
+    const termsLink = document.getElementById('terms-link');
+    const termsPopup = document.getElementById('terms-popup');
+
+    termsLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        termsPopup.showModal();
+    });
+
+    document.getElementById('terms-popup-close').addEventListener('click', () => {
+        termsPopup.close();
+    });
+
+    termsPopup.addEventListener('click', (event) => {
+        if (event.target === termsPopup) termsPopup.close();
+    });
+</script>
+
+</body>
+</html>

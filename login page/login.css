@@ -1,0 +1,380 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  background-color: #f4f6f9;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.main-container span{
+  color:#e2aa2e;
+}
+/* --- LEFT PANE --- */
+.left-pane {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+/* Background Slider Container */
+.bg-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Base Slideshow Styling */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: bgCrossfade 16s infinite ease-in-out;
+}
+
+/*Set your image paths here */
+.slide-1 { background-image: url('../assets/bg1.jpg'); animation-delay: 0s; }
+.slide-2 { background-image: url('../assets/bg2.jpg'); animation-delay: 4s; }
+.slide-3 { background-image: url('../assets/bg3.jpg'); animation-delay: 8s; }
+.slide-4 { background-image: url('../assets/bg4.jpg'); animation-delay: 12s; }
+
+/* Dark Tint Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(12, 35, 90, 0.92) 0%, rgba(5, 20, 55, 0.95) 100%);
+  z-index: 1;
+}
+
+.left-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.logo-badge {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.brand-text h1 {
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.brand-text span {
+  font-size: 12px;
+  color: #d0d7ed;
+  letter-spacing: 1px;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Hero Text Section (Flex-centered) */
+.hero-body {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tagline {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tagline .highlight {
+  color: #e2aa2e;
+}
+
+.subtagline {
+  font-size: 15px;
+  color: #c2ceea;
+  max-width: 420px;
+}
+
+.features-bar {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: auto;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.feature-item i {
+  font-size: 22px;
+  color: #e2aa2e;
+}
+
+/* --- RIGHT PANE --- */
+.right-pane {
+  flex: 1;
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accent-corner {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  border-top: 10px solid #e2aa2e;
+  border-right: 10px solid #e2aa2e;
+  border-top-right-radius: 12px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.avatar-circle {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #dcdfe6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px auto;
+  font-size: 32px;
+  color: #0c235a;
+}
+
+.login-box h2 {
+  color: #0c235a;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* --- FORM ELEMENTS --- */
+.form-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0c235a;
+  margin-bottom: 6px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-wrapper input:focus {
+  border-color: #0c235a;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: #a0aec0;
+  font-size: 16px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  color: #a0aec0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.forgot-link {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #0c235a;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* --- BUTTONS & DIVIDER --- */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #001f54;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #00163c;
+  transform: scale(1.02);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #e2e8f0;
+}
+
+.or-divider span {
+  padding: 0 10px;
+  font-size: 11px;
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+.register-link a {
+  color: #e2aa2e;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.legal-text {
+  font-size: 11px;
+  color: #718096;
+  margin-top: 25px;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.legal-text a {
+  color: #0c235a;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.legal-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Checkbox States */
+.legal-text .checkbox-icon {
+  color: #6c757d;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.legal-checkbox:checked + .checkbox-icon {
+  color: #0d6efd;
+}
+
+.legal-text:hover .checkbox-icon {
+  color: #0b5ed7;
+}
+
+/* Keep the slideshow while leaving the page content in a fixed position. */
+@keyframes bgCrossfade {
+  0% { opacity: 0; }
+  6% { opacity: 1; }
+  25% { opacity: 1; }
+  31% { opacity: 0; }
+  100% { opacity: 0; }
+}
+

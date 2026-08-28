@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - National University</title>
+  <link rel="stylesheet" href="../login page/login.css">
+  <!-- Font Awesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Google Fonts for Clean Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main class="main-container">
+    
+    <!-- LEFT PANE: Branding & Banner -->
+    <aside class="left-pane">
+      <div class="bg-slider">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+      </div>
+
+      <div class="overlay"></div>
+      
+      <div class="left-content">
+        <!-- Logo Header -->
+        <div class="brand-header">
+          <div class="logo-badge">
+            <img src="../assets/NU_shield.svg" alt="Logo">
+          </div>
+
+          <div class="brand-text">
+            <h1>NATIONAL UNIVERSITY</h1>
+            <span>FAIRVIEW</span>
+          </div>
+        </div>
+
+        <!-- Hero Content Group (Centered Vertically) -->
+        <div class="hero-body">
+          <h2 class="tagline">Smart. <span class="highlight">Secure.</span> Seamless.</h2>
+          <p class="subtagline">Reserve your discussion room and access it with ease.</p>
+        </div>
+
+        <!-- Bottom Feature Cards -->
+        <div class="features-bar">
+          <div class="feature-item">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Easy<br>Reservations</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Secure<br>Access</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Streamlined<br>Approvals</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANE: Login Form -->
+    <section class="right-pane">
+      <div class="accent-corner"></div>
+
+      <div class="login-box">
+        <div class="avatar-circle">
+          <i class="fa-regular fa-user"></i>
+        </div>
+
+        <h2>Welcome Back,<span> Nationalian!</span></h2>
+        <p class="subtitle">Login to your account to continue</p>
+
+        <form class="login-form">
+          <!-- Student Email Input -->
+          <div class="form-group">
+            <label for="student-email">Email</label>
+            <div class="input-wrapper">
+              <i class="fa fa-user input-icon"></i>
+              <input type="email" id="student-email" placeholder="Enter your email" required>
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" id="password" placeholder="Enter your password" required>
+              <i class="fa-regular fa-eye toggle-password"></i>
+            </div>
+            <a href="../forgot_pass/forgot.html" class="forgot-link">Forgot Password?</a>
+          </div>
+          
+          <!-- Submit Button -->
+          <button type="submit" class="btn-primary">LOGIN</button>
+
+          <!-- Divider -->
+          <div class="or-divider">
+            <span class="register-link">NO ACCOUNT YET? <a href="../register page/register.html">CREATE AN ACCOUNT</a></span>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>>

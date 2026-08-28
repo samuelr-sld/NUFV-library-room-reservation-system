@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    color: #0c235a;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100%;
+}
+
+p {
+    color: #718096;
+    margin: 0;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.title {
+    padding: 24px 32px 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.terms-content {
+    overflow-y: auto;
+    padding: 20px 32px 32px;
+}
+
+.legal-text {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 5px;
+}
+
+.legal-text span {
+  display: block;
+  max-width: 340px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0c235a;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.legal-checkbox {
+  position: relative;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Checkbox States */
+.legal-text .checkbox-icon {
+  color: #6c757d;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.legal-checkbox:checked + .checkbox-icon {
+  color: #0d6efd;
+}
+
+.checkbox-icon:hover {
+  color: #0b5ed7;
+  cursor: pointer;
+}
