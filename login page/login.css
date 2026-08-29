@@ -18,7 +18,7 @@ body {
 }
 
 .main-container span{
-  color:#e2aa2e;
+  color:#ffd700;
 }
 /* --- LEFT PANE --- */
 .left-pane {
@@ -122,7 +122,7 @@ body {
 }
 
 .tagline .highlight {
-  color: #e2aa2e;
+  color: #ffd700;
 }
 
 .subtagline {
@@ -152,7 +152,7 @@ body {
 
 .feature-item i {
   font-size: 22px;
-  color: #e2aa2e;
+  color: #ffd700;
 }
 
 /* --- RIGHT PANE --- */
@@ -171,8 +171,8 @@ body {
   right: 40px;
   width: 70px;
   height: 70px;
-  border-top: 10px solid #e2aa2e;
-  border-right: 10px solid #e2aa2e;
+  border-top: 10px solid #ffd700;
+  border-right: 10px solid #ffd700;
   border-top-right-radius: 12px;
 }
 
@@ -222,6 +222,10 @@ body {
   margin-bottom: 6px;
 }
 
+.form-group label.is-invalid {
+  color: #dc3545;
+}
+
 .input-wrapper {
   position: relative;
   display: flex;
@@ -236,6 +240,11 @@ body {
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
+}
+
+.input-wrapper input.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.15);
 }
 
 .input-wrapper input:focus {
@@ -317,7 +326,7 @@ body {
 }
 
 .register-link a {
-  color: #e2aa2e;
+  color: #ffd700;
   text-decoration: none;
 }
 

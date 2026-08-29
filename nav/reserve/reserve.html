@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Reserve Room - National University Philippines</title>
+    <link rel="stylesheet" href="reserve.css">
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts for Clean Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="../main/main.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../reserve/reserve.html" class="menu-item active">
+                    <i class="fas fa-door-open"></i>
+                    <span>Reserve Room</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>My Reservations</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Schedule</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Room Reservation</h1>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">Juan Dela Cruz</div>
+                            <div class="student-course">BS Computer Engineering</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-wrapper">
+
+                <!-- Main Grid -->
+                <div class="dashboard-grid">
+                    <!-- Reservation Form -->
+                    <section class="reservation-container">
+                        <div class="section-header">
+                            <i class="fa fa-file-text"></i>
+                            <h2>RESERVATION FORM</h2>
+
+                        </div>
+
+                        <div class="form-divider"></div>
+
+                        <p>Fill out the form below to reserve a room.</p>
+                        
+                        <form class="reservation-form">
+
+                            <div class="form-group">
+                                <label for="room">Room</label>
+
+                                <div class="select-wrapper">
+                                    <i class="fa-solid fa-door-open"></i>
+
+                                    <select id="room" name="room" required>
+                                        <option value="" disabled selected hidden>Select room</option>
+                                        <option value="room 1">Discussion Room 1</option>
+                                        <option value="room 2">Discussion Room 2</option>
+                                        <option value="room 3">Discussion Room 3</option>
+                                        <option value="room 3">Discussion Room 4</option>
+                                        <option value="room 3">Discussion Room 5</option>
+                                        <option value="room 3">Discussion Room 6</option>
+                                    </select>
+
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Date</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-calendar"></i>
+
+                                    <input type="date" id="date" name="date">
+                                </div>
+                            </div>
+
+                            <div class="time-row">
+
+                                <div class="form-group">
+                                    <label for="start-time">Start Time</label>
+
+                                    <div class="select-wrapper">
+                                        <i class="fa-solid fa-clock"></i>
+
+                                        <select id="start-time" name="start-time" required>
+                                            <option value="" disabled selected hidden>Select time</option> 
+                                            <option>9:00 AM</option>
+                                            <option>10:00 AM</option>
+                                            <option>11:00 AM</option>
+                                            <option>12:00 PM</option>
+                                            <option>1:00 PM</option>
+                                            <option>2:00 PM</option>
+                                            <option>3:00 PM</option>
+                                            <option>4:00 PM</option>
+                                            <option>5:00 PM</option>
+                                        </select>
+
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="end-time">End Time</label>
+
+                                    <div class="select-wrapper">
+                                        <i class="fa-solid fa-clock"></i>
+
+                                        <select id="end-time" name="end-time" required>
+                                            <option value="" disabled selected hidden>Select time</option>
+                                            <option>10:00 AM</option>
+                                            <option>11:00 AM</option>
+                                            <option>12:00 PM</option>
+                                            <option>1:00 PM</option>
+                                            <option>2:00 PM</option>
+                                            <option>3:00 PM</option>
+                                            <option>4:00 PM</option>
+                                            <option>5:00 PM</option>
+                                            <option>5:00 PM</option>
+                                        </select>
+
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="purpose">Purpose of Reservation</label>
+                                <div class="input-wrapper">
+                                    <i class="fa fa-briefcase"></i>
+                                    <input type="text" id="purpose" name="purpose" placeholder="Group Project Meeting">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="room">Number of Participants</label>
+                                <div class="select-wrapper">
+                                    <i class="fa fa-users"></i>
+                                    <select id="num" name="num" required>
+                                        <option value="" disabled selected hidden>Select number of participants</option>
+                                        <option value="2">2 Participants</option>
+                                        <option value="3">3 Participants</option>
+                                        <option value="4">4 Participants</option>
+                                        <option value="5">5 Participants</option>
+                                        <option value="6">6 Participants</option>
+                                    </select>
+
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requests">Special Requests (Optional)</label>
+                                <div class="input-wrapper">
+                                    <i class="fa fa-comment"></i>
+                                    <input type="text" id="requests" name="requests" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="button-row">
+                                <button type="reset" class="reset-button">RESET</button>
+                                <button type="submit" class="submit-button">RESERVE ROOM</button>
+                            </div>
+
+                        </form>
+                    </section>
+
+                    <!-- Sidebar Right -->
+                    <aside class="sidebar-right">
+                        <section class="summary-panel">
+                            <div class="summary-header">
+                                <h3>Reservation Summary</h3>
+                                <span class="summary-bar"></span>
+                            </div>
+
+                            <div class="summary-list">
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-door-open"></i>
+                                        <span>Room</span>
+                                    </div>
+                                    <div class="summary-value">Discussion Room 2</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Date</span>
+                                    </div>
+                                    <div class="summary-value">August 20, 2026</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Time</span>
+                                    </div>
+                                    <div class="summary-value">10:00 AM - 12:00 PM</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-hourglass-half"></i>
+                                        <span>Duration</span>
+                                    </div>
+                                    <div class="summary-value">2 Hours</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-briefcase"></i>
+                                        <span>Purpose</span>
+                                    </div>
+                                    <div class="summary-value">Group Project Meeting</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-users"></i>
+                                        <span>Participants</span>
+                                    </div>
+                                    <div class="summary-value">5</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-comment-dots"></i>
+                                        <span>Special Requests</span>
+                                    </div>
+                                    <div class="summary-value">None</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="reminder-card">
+                            <div class="reminder-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <p>Please arrive on time. Your reservation will be cancelled if the room is not used within 15 minutes of the start time.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2026 National University Philippines | Discussion Room Reservation System</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="reserve.js"></script>
+</body>
+</html>

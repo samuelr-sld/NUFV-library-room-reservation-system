@@ -109,6 +109,15 @@ h2 {
   margin-bottom: 6px;
 }
 
+.form-group label.is-invalid {
+  color: #dc3545;
+}
+
+.required-star {
+  color: #dc3545;
+  margin-left: 2px;
+}
+
 .input-wrapper {
   position: relative;
   display: flex;
@@ -123,6 +132,11 @@ h2 {
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
+}
+
+.input-wrapper input.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.15);
 }
 
 .input-wrapper input:focus {
@@ -193,7 +207,7 @@ h2 {
 }
 
 .login-link a {
-  color: #e2aa2e;
+  color: #ffd700;
   text-decoration: none;
 }
 
@@ -241,6 +255,10 @@ h2 {
   color: #6c757d;
   font-size: 1rem;
   transition: color 0.2s ease;
+}
+
+.legal-checkbox.is-invalid + .checkbox-icon {
+  color: #dc3545;
 }
 
 .legal-checkbox:checked + .checkbox-icon {

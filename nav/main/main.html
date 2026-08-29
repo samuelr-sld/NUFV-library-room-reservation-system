@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Student Dashboard - National University Philippines</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts for Clean Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="../main/main.html" class="menu-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../reserve/reserve.html" class="menu-item">
+                    <i class="fas fa-door-open"></i>
+                    <span>Reserve Room</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>My Reservations</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Schedule</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Student Dashboard</h1>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">User</div>
+                            <div class="student-course">Program/Course</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-wrapper">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <div class="welcome-card">
+                        <h2>Welcome Back, <span class="highlight">User!</span></h2>
+                        <p>Reserve your discussion room and access it with ease.</p>
+                    </div>
+                </section>
+
+                <!-- Main Grid -->
+                <div class="dashboard-grid">
+                    <!-- Available Discussion Rooms -->
+                    <section class="discussion-rooms">
+                        <div class="section-header">
+                            <i class="fas fa-users"></i>
+                            <h2>Available Discussion Rooms</h2>
+                        </div>
+                        <table class="rooms-table">
+                            <thead>
+                                <tr>
+                                    <th>Room Name</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Discussion Room 1</td>
+                                    <td><i class="fas fa-users"></i> 3</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><button class="reserve-btn">Reserve</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Discussion Room 2</td>
+                                    <td><i class="fas fa-users"></i> 5</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><button class="reserve-btn">Reserve</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Discussion Room 3</td>
+                                    <td><i class="fas fa-users"></i> 5</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><button class="reserve-btn">Reserve</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Discussion Room 4</td>
+                                    <td><i class="fas fa-users"></i> 6</td>
+                                    <td><span class="status in-use">In use</span></td>
+                                    <td><button class="reserve-btn">Reserve</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Discussion Room 5</td>
+                                    <td><i class="fas fa-users"></i> 10</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><button class="reserve-btn">Reserve</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- Sidebar Right -->
+                    <aside class="sidebar-right">
+                        <!-- Upcoming Reservations -->
+                        <section class="upcoming-reservations">
+                            <div class="section-header">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h3>Upcoming Reservations</h3>
+                            </div>
+                            <div class="reservation-card">
+                                <div class="date-badge">
+                                    <div class="month">AUG</div>
+                                    <div class="day">10</div>
+                                    <div class="dayname">SAT</div>
+                                </div>
+                                <div class="reservation-details">
+                                    <h4>Discussion Room 1</h4>
+                                    <p class="time"><i class="fas fa-clock"></i> 10:00 AM - 12:00 PM</p>
+                                    <p class="activity"><i class="fas fa-users"></i> Group Project Meeting</p>
+                                </div>
+                                <span class="badge today">Today</span>
+                            </div>
+                            <div class="reservation-card">
+                                <div class="date-badge">
+                                    <div class="month">AUG</div>
+                                    <div class="day">12</div>
+                                    <div class="dayname">MON</div>
+                                </div>
+                                <div class="reservation-details">
+                                    <h4>Discussion Room 3</h4>
+                                    <p class="time"><i class="fas fa-clock"></i> 01:00 PM - 03:00 PM</p>
+                                    <p class="activity"><i class="fas fa-users"></i> Capstone Discussion</p>
+                                </div>
+                                <span class="badge upcoming">Upcoming</span>
+                            </div>
+                        </section>
+
+                        <!-- Announcements -->
+                        <section class="announcements">
+                            <div class="section-header">
+                                <i class="fas fa-bullhorn"></i>
+                                <h3>Announcements</h3>
+                            </div>
+                            <div class="announcement-card">
+                                <div class="announcement-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="announcement-content">
+                                    <h4>Room Maintenance Advisory</h4>
+                                    <p>Discussion Room 5 will be unavailable on August 15, 2026 for maintenance.</p>
+                                </div>
+                                <span class="date">Aug 09, 2026</span>
+                            </div>
+                            <div class="announcement-card">
+                                <div class="announcement-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="announcement-content">
+                                    <h4>Extended Hours</h4>
+                                    <p>Discussion rooms will be open until 08:00 PM during the midterm week.</p>
+                                </div>
+                                <span class="date">Aug 08, 2026</span>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2026 National University Philippines | Discussion Room Reservation System</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
