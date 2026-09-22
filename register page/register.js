@@ -1,3 +1,7 @@
+import { auth, db } from '../firebase/firebase-config.js';
+import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
 const registerForm = document.querySelector('.register-form');
 const usernameInput = document.getElementById('username');
 const studentNumberInput = document.getElementById('student-num');
@@ -49,7 +53,7 @@ function validateForm() {
   return allValid;
 }
 
-requiredFields = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
+const requiredFields = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
 requiredFields.forEach((field) => {
   field.addEventListener('input', () => {
     setFieldState(field, field.value.trim().length > 0);
@@ -86,5 +90,32 @@ registerForm.addEventListener('submit', function (event) {
     return;
   }
 
-  window.location.href = '../login page/login.html';
+  const username = usernameInput.value.trim();
+  const studentNumber = studentNumberInput.value.trim();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  const submitButton = registerForm.querySelector('.submit-button');
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'CREATING ACCOUNT...';
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const uid = userCredential.user.uid;
+
+      return setDoc(doc(db, 'users', uid), {
+        username: username,
+        studentNumber: studentNumber,
+        email: email,
+        createdAt: new Date().toISOString()
+      });
+    })
+    .then(() => {
+      window.location.href = '../login page/login.html';
+    })
+    .catch((error) => {
+      submitButton.disabled = false;
+      submitButton.textContent = 'SUBMIT';
+      alert('DEBUG ERROR:\n' + error.code + '\n' + error.message);
+    });
 });

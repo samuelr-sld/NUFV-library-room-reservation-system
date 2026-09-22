@@ -1,3 +1,6 @@
+import { auth } from '../firebase/firebase-config.js';
+import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
 const loginForm = document.querySelector('.login-form');
 const emailInput = document.getElementById('student-email');
 const passwordInput = document.getElementById('password');
@@ -45,5 +48,29 @@ loginForm.addEventListener('submit', function (event) {
     return;
   }
 
-  window.location.href = '../nav/main/main.html';
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+  const submitButton = loginForm.querySelector('.btn-primary');
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'LOGGING IN...';
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      window.location.href = '../nav/main/main.html';
+    })
+    .catch((error) => {
+      submitButton.disabled = false;
+      submitButton.textContent = 'LOGIN';
+
+      let message = 'Login failed. Please try again.';
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+        message = 'Incorrect email or password.';
+      } else if (error.code === 'auth/user-not-found') {
+        message = 'No account found with that email.';
+      } else if (error.code === 'auth/invalid-email') {
+        message = 'Please enter a valid email address.';
+      }
+      alert(message);
+    });
 });
