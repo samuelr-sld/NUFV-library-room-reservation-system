@@ -1,16 +1,8 @@
-# NUFV Library Room Reservation System
-
-## Project Title
-
-**NUFV Library Room Reservation System**
-
-## Project Description
+# NUFV LRC System
 
 The NUFV Library Room Reservation System is a web-based front-end prototype designed to provide National University Fairview students with a simple and user-friendly way to reserve discussion rooms. The system presents a student-oriented interface for account registration, login, password reset, room browsing, and reservation scheduling.
 
 The reservation interface allows users to select a discussion room, date, start and end times, purpose, number of participants, and special requests. A reservation summary is updated dynamically based on the user's selections. The project also includes a student dashboard, terms and conditions page, and responsive visual components using National University branding.
-
-This repository currently contains the front-end implementation and client-side interactions. No backend server, database, or persistent reservation-management service is included in the repository.
 
 ## Group Members
 
