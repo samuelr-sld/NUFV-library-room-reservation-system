@@ -64,7 +64,3 @@ The platform includes multiple reservation and utility services designed to supp
 ## System Backend
 
 The system uses **Firebase** as its cloud backend. Firebase Authentication handles user account authentication, while **Cloud Firestore** provides persistent storage for user and reservation data. This backend integration allows reservation records and other system information to be stored and accessed across the application's supported workflows.
-
-## Project Status
-
-**Completed** - The NUFV Library Room Reservation System includes the student-facing interface, reservation services, Wi-Fi voucher generation, Firebase authentication, and cloud-based data management required for the completed project.
