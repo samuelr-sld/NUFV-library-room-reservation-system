@@ -28,9 +28,17 @@
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
-                <a href="../reserve/reserve.html" class="menu-item">
-                    <i class="fas fa-door-open"></i>
-                    <span>Reserve Room</span>
+                <a href="../Discussion Room/reserve_discussion.html" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Reserve Discussion Room</span>
+                </a>
+                <a href="../Silent Room/reserve_silent.html" class="menu-item">
+                    <i class="fas fa-volume-mute"></i>
+                    <span>Reserve Silent Room</span>
+                </a>
+                <a href="../Computer Room/reserve_computer.html" class="menu-item">
+                    <i class="fas fa-desktop"></i>
+                    <span>Reserve Computer Room</span>
                 </a>
                 <a href="#" class="menu-item">
                     <i class="fas fa-calendar-check"></i>
@@ -68,7 +76,7 @@
             <header class="header">
                 <h1>Student Dashboard</h1>
                 <div class="header-actions">
-                    <button class="notification-btn">
+                    <button class="notification-btn" aria-label="Notifications">
                         <i class="fas fa-bell"></i>
                     </button>
                     <div class="profile-section">
@@ -87,23 +95,24 @@
                 <!-- Welcome Section -->
                 <section class="welcome-section">
                     <div class="welcome-card">
-                        <h2>Welcome Back, <span class="highlight">User!</span></h2>
-                        <p>Reserve your discussion room and access it with ease.</p>
+                        <h2>Welcome Back, <span class="highlight">User</span>!</h2>
+                        <p>Reserve your discussion room, silent room, or computer workstation with ease.</p>
                     </div>
                 </section>
 
                 <!-- Main Grid -->
                 <div class="dashboard-grid">
-                    <!-- Available Discussion Rooms -->
+                    <!-- Available Rooms Table -->
                     <section class="discussion-rooms">
                         <div class="section-header">
-                            <i class="fas fa-users"></i>
-                            <h2>Available Discussion Rooms</h2>
+                            <i class="fas fa-door-open"></i>
+                            <h2>Available Rooms</h2>
                         </div>
                         <table class="rooms-table">
                             <thead>
                                 <tr>
                                     <th>Room Name</th>
+                                    <th>Type</th>
                                     <th>Capacity</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -112,33 +121,45 @@
                             <tbody>
                                 <tr>
                                     <td>Discussion Room 1</td>
-                                    <td><i class="fas fa-users"></i> 3</td>
+                                    <td><span class="room-type discussion"><i class="fas fa-users"></i> Discussion</span></td>
+                                    <td><i class="fas fa-user-friends"></i> 5</td>
                                     <td><span class="status available">Available</span></td>
-                                    <td><button class="reserve-btn">Reserve</button></td>
+                                    <td><a href="../Discussion Room/reserve_discussion.html" class="reserve-btn">Reserve</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Silent Room A</td>
+                                    <td><span class="room-type silent"><i class="fas fa-volume-mute"></i> Silent</span></td>
+                                    <td><i class="fas fa-user"></i> 1</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><a href="../Silent Room/reserve_silent.html" class="reserve-btn">Reserve</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Computer Lab Station 04</td>
+                                    <td><span class="room-type computer"><i class="fas fa-desktop"></i> Computer</span></td>
+                                    <td><i class="fas fa-user"></i> 1</td>
+                                    <td><span class="status available">Available</span></td>
+                                    <td><a href="../Computer Room/reserve_computer.html" class="reserve-btn">Reserve</a></td>
                                 </tr>
                                 <tr>
                                     <td>Discussion Room 2</td>
-                                    <td><i class="fas fa-users"></i> 5</td>
-                                    <td><span class="status available">Available</span></td>
-                                    <td><button class="reserve-btn">Reserve</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Discussion Room 3</td>
-                                    <td><i class="fas fa-users"></i> 5</td>
-                                    <td><span class="status available">Available</span></td>
-                                    <td><button class="reserve-btn">Reserve</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Discussion Room 4</td>
-                                    <td><i class="fas fa-users"></i> 6</td>
+                                    <td><span class="room-type discussion"><i class="fas fa-users"></i> Discussion</span></td>
+                                    <td><i class="fas fa-user-friends"></i> 6</td>
                                     <td><span class="status in-use">In use</span></td>
-                                    <td><button class="reserve-btn">Reserve</button></td>
+                                    <td><button class="reserve-btn" disabled style="opacity: 0.6; cursor: not-allowed;">In Use</button></td>
                                 </tr>
                                 <tr>
-                                    <td>Discussion Room 5</td>
-                                    <td><i class="fas fa-users"></i> 10</td>
+                                    <td>Silent Room B</td>
+                                    <td><span class="room-type silent"><i class="fas fa-volume-mute"></i> Silent</span></td>
+                                    <td><i class="fas fa-user"></i> 1</td>
                                     <td><span class="status available">Available</span></td>
-                                    <td><button class="reserve-btn">Reserve</button></td>
+                                    <td><a href="../Silent Room/reserve_silent.html" class="reserve-btn">Reserve</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Computer Lab Station 08</td>
+                                    <td><span class="room-type computer"><i class="fas fa-desktop"></i> Computer</span></td>
+                                    <td><i class="fas fa-user"></i> 1</td>
+                                    <td><span class="status in-use">In use</span></td>
+                                    <td><button class="reserve-btn" disabled style="opacity: 0.6; cursor: not-allowed;">In Use</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -172,9 +193,9 @@
                                     <div class="dayname">MON</div>
                                 </div>
                                 <div class="reservation-details">
-                                    <h4>Discussion Room 3</h4>
+                                    <h4>Computer Lab Station 04</h4>
                                     <p class="time"><i class="fas fa-clock"></i> 01:00 PM - 03:00 PM</p>
-                                    <p class="activity"><i class="fas fa-users"></i> Capstone Discussion</p>
+                                    <p class="activity"><i class="fas fa-desktop"></i> Programming Work</p>
                                 </div>
                                 <span class="badge upcoming">Upcoming</span>
                             </div>
@@ -202,7 +223,7 @@
                                 </div>
                                 <div class="announcement-content">
                                     <h4>Extended Hours</h4>
-                                    <p>Discussion rooms will be open until 08:00 PM during the midterm week.</p>
+                                    <p>Discussion and Silent rooms will be open until 08:00 PM during midterm week.</p>
                                 </div>
                                 <span class="date">Aug 08, 2026</span>
                             </div>
@@ -213,9 +234,42 @@
 
             <!-- Footer -->
             <footer class="footer">
-                <p>&copy; 2026 National University Philippines | Discussion Room Reservation System</p>
+                <p>&copy; 2026 National University Philippines | Room Reservation System</p>
             </footer>
         </main>
     </div>
+
+    <!-- Automatic User Data Loader Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedUser = localStorage.getItem('currentUser');
+
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+
+                    // Update Banner Greeting Name
+                    const highlightElement = document.querySelector('.welcome-card .highlight');
+                    if (highlightElement && user.username) {
+                        highlightElement.textContent = user.username;
+                    }
+
+                    // Update Header Student Name
+                    const nameElement = document.querySelector('.student-name');
+                    if (nameElement && user.username) {
+                        nameElement.textContent = user.username;
+                    }
+
+                    // Update Header Program / Student Number
+                    const courseElement = document.querySelector('.student-course');
+                    if (courseElement) {
+                        courseElement.textContent = user.studentNum || user.course || 'BS Computer Engineering';
+                    }
+                } catch (e) {
+                    console.error('Error parsing current user session:', e);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

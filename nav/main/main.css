@@ -19,7 +19,7 @@ body {
 
 /* ==================== SIDEBAR ==================== */
 .sidebar {
-    width: 200px;
+    width: 220px;
     background: linear-gradient(180deg, rgba(12, 35, 90, 0.92) 0%, rgba(5, 20, 55, 0.95) 100%);
     color: white;
     display: flex;
@@ -60,7 +60,7 @@ body {
 /* Sidebar Menu */
 .sidebar-menu {
     flex: 1;
-    padding: 20px 0;
+    padding: 15px 0;
     display: flex;
     flex-direction: column;
 }
@@ -68,12 +68,12 @@ body {
 .menu-item {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    padding: 12px 18px;
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: all 0.3s ease;
     border-left: 4px solid transparent;
-    gap: 15px;
+    gap: 12px;
 }
 
 .menu-item:hover {
@@ -89,23 +89,23 @@ body {
 }
 
 .menu-item i {
-    font-size: 18px;
-    width: 24px;
+    font-size: 16px;
+    width: 20px;
     text-align: center;
 }
 
 .menu-item span {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
 }
 
 .sidebar-footer {
-    padding: 20px 0;
+    padding: 15px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .menu-item.logout {
-    padding: 15px 20px;
+    padding: 12px 18px;
 }
 
 /* ==================== MAIN CONTENT ==================== */
@@ -175,17 +175,27 @@ body {
 .profile-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    max-width: 180px;
 }
 
 .student-name {
     font-weight: 600;
     color: rgba(12, 35, 90, 0.92);
     font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .student-course {
     font-size: 12px;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .profile-section i:last-child {
@@ -302,6 +312,32 @@ body {
     background-color: #f9fafb;
 }
 
+/* Room Type Badges */
+.room-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.room-type.discussion {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+.room-type.silent {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.room-type.computer {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
 /* Status Badge */
 .status {
     display: inline-block;
@@ -332,6 +368,8 @@ body {
     font-size: 13px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .reserve-btn:hover {
@@ -457,6 +495,7 @@ body {
     background-color: #f9fafb;
     border-radius: 8px;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .announcement-card:last-child {
@@ -500,10 +539,6 @@ body {
     right: 15px;
 }
 
-.announcement-card {
-    position: relative;
-}
-
 /* Footer */
 .footer {
     background: white;
@@ -539,7 +574,7 @@ body {
     }
 
     .sidebar {
-        width: 160px;
+        width: 180px;
     }
 
     .menu-item span {
