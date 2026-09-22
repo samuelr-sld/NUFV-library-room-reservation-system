@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Reserve Computer Station - National University Philippines</title>
+    <link rel="stylesheet" href="reserve_computer.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+    <a href="../main/main.html" class="menu-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+    <a href="../Discussion Room/reserve_discussion.html" class="menu-item">
+        <i class="fas fa-users"></i>
+        <span>Reserve Discussion Room</span>
+    </a>
+    <a href="../Silent Room/reserve_silent.html" class="menu-item">
+        <i class="fas fa-volume-mute"></i>
+        <span>Reserve Silent Room</span>
+    </a>
+    <a href="../Computer Room/reserve_computer.html" class="menu-item active">
+        <i class="fas fa-desktop"></i>
+        <span>Reserve Computer Room</span>
+    </a>
+    <a href="#" class="menu-item">
+        <i class="fas fa-calendar-check"></i>
+        <span>My Reservations</span>
+    </a>
+    <a href="#" class="menu-item">
+        <i class="fas fa-clock"></i>
+        <span>Schedule</span>
+    </a>
+    <a href="#" class="menu-item">
+        <i class="fas fa-history"></i>
+        <span>History</span>
+    </a>
+    <a href="#" class="menu-item">
+        <i class="fas fa-user-circle"></i>
+        <span>My Profile</span>
+    </a>
+    <a href="#" class="menu-item">
+        <i class="fas fa-question-circle"></i>
+        <span>Help & Support</span>
+    </a>
+</nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Computer Lab Station Reservation</h1>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">Juan Dela Cruz</div>
+                            <div class="student-course">BS Computer Engineering</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-wrapper">
+                <div class="dashboard-grid">
+                    <!-- Reservation Form -->
+                    <section class="reservation-container">
+                        <div class="section-header">
+                            <i class="fas fa-desktop"></i>
+                            <h2>COMPUTER WORKSTATION FORM</h2>
+                        </div>
+
+                        <div class="form-divider"></div>
+
+                        <p>Fill out the form below to reserve a PC laboratory workstation.</p>
+                        
+                        <form class="reservation-form">
+                            <div class="form-group">
+                                <label for="room">Workstation PC</label>
+                                <div class="select-wrapper">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                    <select id="room" name="room" required>
+                                        <option value="" disabled selected hidden>Select PC station</option>
+                                        <option value="pc01">Computer Lab Station 01</option>
+                                        <option value="pc02">Computer Lab Station 02</option>
+                                        <option value="pc03">Computer Lab Station 03</option>
+                                        <option value="pc04">Computer Lab Station 04</option>
+                                        <option value="pc05">Computer Lab Station 05</option>
+                                        <option value="pc06">Computer Lab Station 06</option>
+                                        <option value="pc07">Computer Lab Station 07</option>
+                                        <option value="pc08">Computer Lab Station 08</option>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Reservation Date</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <input type="date" id="date" name="date">
+                                </div>
+                            </div>
+
+                            <div class="time-row">
+                                <div class="form-group">
+                                    <label for="start-time">Start Time</label>
+                                    <div class="select-wrapper">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <select id="start-time" name="start-time" required>
+                                            <option value="" disabled selected hidden>Select time</option> 
+                                            <option>8:00 AM</option>
+                                            <option>9:00 AM</option>
+                                            <option>10:00 AM</option>
+                                            <option>11:00 AM</option>
+                                            <option>12:00 PM</option>
+                                            <option>1:00 PM</option>
+                                            <option>2:00 PM</option>
+                                            <option>3:00 PM</option>
+                                            <option>4:00 PM</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="end-time">End Time</label>
+                                    <div class="select-wrapper">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <select id="end-time" name="end-time" required>
+                                            <option value="" disabled selected hidden>Select time</option>
+                                            <option>9:00 AM</option>
+                                            <option>10:00 AM</option>
+                                            <option>11:00 AM</option>
+                                            <option>12:00 PM</option>
+                                            <option>1:00 PM</option>
+                                            <option>2:00 PM</option>
+                                            <option>3:00 PM</option>
+                                            <option>4:00 PM</option>
+                                            <option>5:00 PM</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="purpose">Academic Software / Activity Purpose</label>
+                                <div class="input-wrapper">
+                                    <i class="fa fa-code"></i>
+                                    <input type="text" id="purpose" name="purpose" placeholder="Programming / MATLAB / CAD Modeling / Research">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="num">User Capacity</label>
+                                <div class="select-wrapper">
+                                    <i class="fa fa-user"></i>
+                                    <select id="num" name="num" required>
+                                        <option value="1 User" selected>1 User per Station</option>
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requests">Required Software / Tools (Optional)</label>
+                                <div class="input-wrapper">
+                                    <i class="fa fa-sliders"></i>
+                                    <input type="text" id="requests" name="requests" placeholder="e.g. VS Code, Cisco Packet Tracer, MATLAB">
+                                </div>
+                            </div>
+
+                            <div class="button-row">
+                                <button type="reset" class="reset-button">RESET</button>
+                                <button type="submit" class="submit-button">RESERVE STATION</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Sidebar Right -->
+                    <aside class="sidebar-right">
+                        <section class="summary-panel">
+                            <div class="summary-header">
+                                <h3>Reservation Summary</h3>
+                                <span class="summary-bar"></span>
+                            </div>
+
+                            <div class="summary-list">
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-desktop"></i>
+                                        <span>Station</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Date</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Time</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-hourglass-half"></i>
+                                        <span>Duration</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-code"></i>
+                                        <span>Activity</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-user"></i>
+                                        <span>User</span>
+                                    </div>
+                                    <div class="summary-value">1 User</div>
+                                </div>
+
+                                <div class="summary-row">
+                                    <div class="summary-label">
+                                        <i class="fas fa-microchip"></i>
+                                        <span>Software</span>
+                                    </div>
+                                    <div class="summary-value">-</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="reminder-card">
+                            <div class="reminder-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <p>Please save all work to cloud storage and log out of accounts before your session ends. PC drives are wiped upon restart.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2026 National University Philippines | Computer Lab Reservation System</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="reserve_computer.js"></script>
+</body>
+</html>
