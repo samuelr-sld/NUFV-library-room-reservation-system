@@ -21,9 +21,9 @@ function setFieldState(input, isValid) {
 
 function validateForm() {
   let allValid = true;
-  const requiredFields = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
+  const fields = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
 
-  requiredFields.forEach((field) => {
+  fields.forEach((field) => {
     const isValid = field.value.trim().length > 0;
     setFieldState(field, isValid);
     if (!isValid) allValid = false;
@@ -49,8 +49,8 @@ function validateForm() {
   return allValid;
 }
 
-requiredFields = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
-requiredFields.forEach((field) => {
+const requiredInputs = [usernameInput, studentNumberInput, emailInput, passwordInput, confirmPasswordInput];
+requiredInputs.forEach((field) => {
   field.addEventListener('input', () => {
     setFieldState(field, field.value.trim().length > 0);
 
@@ -86,5 +86,33 @@ registerForm.addEventListener('submit', function (event) {
     return;
   }
 
+  const newUserData = {
+    username: usernameInput.value.trim(),
+    studentNum: studentNumberInput.value.trim(),
+    email: emailInput.value.trim().toLowerCase(),
+    password: passwordInput.value.trim(),
+    course: 'BS Computer Engineering'
+  };
+
+  const usersDB = JSON.parse(localStorage.getItem('usersDB')) || [];
+
+  const existingUser = usersDB.find(u => u.email === newUserData.email);
+  if (existingUser) {
+    alert('An account with this email already exists. Please log in.');
+    window.location.href = '../login page/login.html';
+    return;
+  }
+
+  usersDB.push(newUserData);
+  localStorage.setItem('usersDB', JSON.stringify(usersDB));
+
+  localStorage.setItem('currentUser', JSON.stringify({
+    username: newUserData.username,
+    studentNum: newUserData.studentNum,
+    course: newUserData.course,
+    email: newUserData.email
+  }));
+
+  alert('Registration successful! Redirecting to login page...');
   window.location.href = '../login page/login.html';
 });
