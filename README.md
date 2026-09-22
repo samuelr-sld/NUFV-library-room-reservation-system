@@ -1,10 +1,4 @@
-# NUFV Library Room Reservation System
-
-## Project Title
-
-**NUFV Library Room Reservation System**
-
-## Project Description
+# NUFV LRC SYSTEM
 
 The NUFV Library Room Reservation System is a completed web-based reservation platform developed for National University Fairview students. It provides a centralized and user-friendly system for managing library study-space reservations and related student services.
 
