@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex">
+    <title>Approval request - National University</title>
+    <link rel="stylesheet" href="approve.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="brand">
+        <img src="../assets/NU_shield.svg" alt="" class="brand-logo">
+        <div>
+            <div class="brand-name">NATIONAL UNIVERSITY</div>
+            <div class="brand-sub">FAIRVIEW &middot; Library Services</div>
+        </div>
+    </header>
+
+    <main class="card" id="card" aria-live="polite">
+        <p id="loading">Checking this approval request...</p>
+
+        <!-- The link was opened but nothing has been verified yet -->
+        <section id="step-start" hidden>
+            <h1 id="start-title"></h1>
+            <p>A student has asked for a discussion room reservation that needs your decision. Before showing it, we need to confirm that you are the person it was sent to.</p>
+            <p>We will email a one-time code to <strong id="email-hint"></strong>.</p>
+            <button type="button" class="primary" id="send-code">Send me a code</button>
+        </section>
+
+        <section id="step-code" hidden>
+            <h1>Enter your code</h1>
+            <p>We sent a 6-digit code to <strong id="email-hint-2"></strong>. It works once and expires in 10 minutes.</p>
+            <form id="code-form" novalidate>
+                <label for="code">One-time code</label>
+                <input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="123456">
+                <div class="row">
+                    <button type="submit" class="primary" id="verify">Verify</button>
+                    <button type="button" class="secondary" id="resend">Send a new code</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="step-review" hidden>
+            <h1 id="review-title"></h1>
+            <dl class="facts" id="facts"></dl>
+            <p class="small" id="previous"></p>
+            <label for="comment">Comment (optional, shown to the student)</label>
+            <textarea id="comment" rows="3" maxlength="300"></textarea>
+            <div class="row">
+                <button type="button" class="primary" id="approve">Approve</button>
+                <button type="button" class="danger" id="reject">Reject</button>
+            </div>
+        </section>
+
+        <section id="step-done" hidden>
+            <h1 id="done-title"></h1>
+            <p id="done-text"></p>
+        </section>
+
+        <section id="step-closed" hidden>
+            <h1>This request is not open</h1>
+            <p>It may already have been decided, been cancelled by the student, run out of time, or been replaced by a newer link. If you still need to act on it, ask the library to send it again.</p>
+        </section>
+
+        <p class="message" id="message" role="alert" hidden></p>
+    </main>
+    <script type="module" src="approve.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+rules_version = '2';
+
+// Default deny. Each collection is opened explicitly as its feature lands.
+// All writes to users, studentNumbers, auditLogs, resources, settings, tickets, ticketLocks and the reservation collections go through the Express API (Admin SDK),
+// which authorizes administrators from their Firestore profile. Clients get no direct access to those collections,
+// not even administrators: the API is the single place where inventory and settings rules are enforced.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // A signed-in user may read only their own profile (the frontend needs it to route by role and status).
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Spelled out so the intent survives future edits to the default rule above.
+    match /resources/{id} { allow read, write: if false; }
+    match /settings/{id} { allow read, write: if false; }
+    match /auditLogs/{id} { allow read, write: if false; }
+    match /studentNumbers/{id} { allow read, write: if false; }
+
+    // Stubs are issued, listed and printed only through the API. Even a student's own ticket is not readable here:
+    // the document carries the encrypted Wi-Fi credential and the QR reference.
+    match /tickets/{id} { allow read, write: if false; }
+    match /ticketLocks/{id} { allow read, write: if false; }
+
+    // Discussion room reservations. Locks, workflow state, approver challenges (hashed one-time secrets), the immutable
+    // approval trail and the email outbox are server-only; students read their reservations through the API.
+    match /reservations/{id} { allow read, write: if false; }
+    match /reservationLocks/{id} { allow read, write: if false; }
+    match /approvalWorkflows/{id} { allow read, write: if false; }
+    match /approvalChallenges/{id} { allow read, write: if false; }
+    match /approvalActions/{id} { allow read, write: if false; }
+    match /emailOutbox/{id} { allow read, write: if false; }
+    match /rateLimits/{id} { allow read, write: if false; } // per-IP counters for the public approval endpoints
+  }
+}

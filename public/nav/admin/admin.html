@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" hidden data-role="admin">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator - National University Philippines</title>
+    <link rel="stylesheet" href="../main/main.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../reservations/reservations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Administrator">
+                <a href="#overview" class="menu-item active" data-view="overview">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#resources" class="menu-item" data-view="resources">
+                    <i class="fas fa-boxes-stacked"></i>
+                    <span>Resources</span>
+                </a>
+                <a href="#tickets" class="menu-item" data-view="tickets">
+                    <i class="fas fa-qrcode"></i>
+                    <span>Scan Codes</span>
+                </a>
+                <a href="#reservations" class="menu-item" data-view="reservations">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Reservations</span>
+                </a>
+                <a href="#workflow" class="menu-item" data-view="workflow">
+                    <i class="fas fa-list-check"></i>
+                    <span>Approval Chain</span>
+                </a>
+                <a href="#ops" class="menu-item" data-view="ops">
+                    <i class="fas fa-screwdriver-wrench"></i>
+                    <span>Operations</span>
+                </a>
+                <a href="#audit" class="menu-item" data-view="audit">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Audit Log</span>
+                </a>
+                <a href="#settings" class="menu-item" data-view="settings">
+                    <i class="fas fa-gear"></i>
+                    <span>System Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1 id="view-title">Overview</h1>
+                <div class="header-actions">
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">Administrator</div>
+                            <div class="student-course">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Overview -->
+                <section id="view-overview" class="view">
+                    <p class="state" data-state></p>
+                    <div id="overview-body" hidden>
+                        <div class="cards" id="type-cards"></div>
+                        <div class="panel">
+                            <div class="section-header">
+                                <i class="fas fa-gear"></i>
+                                <h2>System settings</h2>
+                                <a href="#settings" class="link-button">Open settings</a>
+                            </div>
+                            <dl class="facts" id="settings-facts"></dl>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resources -->
+                <section id="view-resources" class="view" hidden>
+                    <div class="toolbar">
+                        <label>Type
+                            <select id="filter-type">
+                                <option value="">All types</option>
+                                <option value="silent-seat">Silent room seats</option>
+                                <option value="computer-station">Computer stations</option>
+                                <option value="discussion-room">Discussion rooms</option>
+                            </select>
+                        </label>
+                        <label>Status
+                            <select id="filter-status">
+                                <option value="">All statuses</option>
+                                <option value="active">Active</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="retired">Retired</option>
+                            </select>
+                        </label>
+                        <button type="button" class="reserve-btn" id="add-resource">Add resource</button>
+                    </div>
+
+                    <form id="resource-form" class="panel form-panel" hidden novalidate>
+                        <h3 id="resource-form-title">Add resource</h3>
+                        <div class="field-row">
+                            <label>Identifier
+                                <input id="f-id" autocomplete="off" placeholder="silent-seat-01" maxlength="40">
+                            </label>
+                            <label>Type
+                                <select id="f-type">
+                                    <option value="silent-seat">Silent room seat</option>
+                                    <option value="computer-station">Computer station</option>
+                                    <option value="discussion-room">Discussion room</option>
+                                </select>
+                            </label>
+                            <label>Label
+                                <input id="f-label" autocomplete="off" placeholder="Seat 1" maxlength="80">
+                            </label>
+                            <label id="f-capacity-wrap">Capacity
+                                <input id="f-capacity" type="number" min="1" max="50" step="1">
+                            </label>
+                            <label id="f-status-wrap">Status
+                                <select id="f-status"></select>
+                            </label>
+                        </div>
+                        <p class="notice error" id="resource-error" role="alert" hidden></p>
+                        <div class="actions">
+                            <button type="submit" class="reserve-btn" id="resource-save">Save</button>
+                            <button type="button" class="reserve-btn secondary" id="resource-cancel">Cancel</button>
+                        </div>
+                    </form>
+
+                    <p class="state" data-state></p>
+                    <section class="panel table-panel" id="resource-table-wrap" hidden>
+                        <table class="rooms-table">
+                            <thead>
+                                <tr>
+                                    <th>Identifier</th>
+                                    <th>Type</th>
+                                    <th>Label</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Allocation</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resource-rows"></tbody>
+                        </table>
+                    </section>
+                    <p class="notice" id="resource-notice" role="status" hidden></p>
+                </section>
+
+                <!-- Ticket operations -->
+                <section id="view-tickets" class="view" hidden>
+                    <div class="panel">
+                        <div class="section-header">
+                            <i class="fas fa-qrcode"></i>
+                            <h2>Scan a code</h2>
+                        </div>
+                        <p class="hint">Scan the QR code on a student's stub or on a discussion room reservation confirmation, or type the code, ticket ID or reservation reference. A code only tells you what it refers to: always check the student's ID.</p>
+
+                        <div class="video-wrap" id="video-wrap" hidden>
+                            <video id="scan-video" playsinline muted></video>
+                        </div>
+                        <div class="toolbar">
+                            <label>Camera
+                                <select id="camera-select"><option value="">Default camera</option></select>
+                            </label>
+                            <button type="button" class="reserve-btn" id="scan-start">Start camera</button>
+                            <button type="button" class="reserve-btn secondary" id="scan-stop" disabled>Stop camera</button>
+                        </div>
+                        <p class="notice" id="scan-status" role="status" hidden></p>
+
+                        <form id="manual-form" class="field-row" novalidate>
+                            <label>Code, ticket ID or reservation reference
+                                <input id="manual-ref" autocomplete="off" spellcheck="false" maxlength="64" placeholder="NUFV1:..., NUFR1:..., SR-0123456789 or RC-0123456789">
+                            </label>
+                            <button type="submit" class="reserve-btn">Look up</button>
+                        </form>
+                    </div>
+
+                    <p class="state error" id="lookup-state" hidden></p>
+
+                    <section class="panel" id="ticket-panel" hidden>
+                        <div class="banner" id="ticket-banner" role="status"></div>
+                        <dl class="facts" id="ticket-facts"></dl>
+                        <p class="notice error" id="ticket-warnings" role="alert" hidden></p>
+                        <div class="actions" id="ticket-actions"></div>
+                        <p class="notice" id="ticket-feedback" role="status" hidden></p>
+                    </section>
+
+                    <section class="panel" id="reservation-panel" hidden>
+                        <div class="banner" id="reservation-banner" role="status"></div>
+                        <dl class="facts" id="reservation-facts"></dl>
+                        <p class="notice error" id="reservation-warnings" role="alert" hidden></p>
+                        <p class="hint">Discussion room reservations are checked here but not checked in: attendance for reservations is not part of the system yet.</p>
+                        <div class="actions">
+                            <button type="button" class="reserve-btn secondary" id="reservation-next">Scan next</button>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- Discussion room reservations -->
+                <section id="view-reservations" class="view" hidden>
+                    <div class="toolbar">
+                        <label>Show
+                            <select id="res-status">
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="cancelled">Cancelled</option>
+                                <option value="expired">Expired</option>
+                            </select>
+                        </label>
+                    </div>
+                    <p class="state" id="res-state" hidden></p>
+                    <section class="panel table-panel" id="res-table-wrap" hidden>
+                        <table class="rooms-table">
+                            <thead>
+                                <tr><th>Student</th><th>Room</th><th>When</th><th>Status</th><th>Step</th><th></th></tr>
+                            </thead>
+                            <tbody id="res-rows"></tbody>
+                        </table>
+                    </section>
+                    <section class="panel" id="res-detail" hidden>
+                        <div class="section-header"><i class="fas fa-calendar-check"></i><h2>Reservation</h2></div>
+                        <dl class="facts" id="res-facts"></dl>
+                        <div id="res-tracker"></div>
+                        <p class="hint">Approval chain: <span id="res-chain"></span></p>
+                        <ul class="history" id="res-history"></ul>
+                        <div id="res-actions"></div>
+                        <p class="notice" id="res-feedback" role="status" hidden></p>
+                    </section>
+                </section>
+
+                <!-- Approval chain -->
+                <section id="view-workflow" class="view" hidden>
+                    <p class="state" id="wf-state" hidden></p>
+                    <form id="wf-form" class="panel form-panel" hidden novalidate>
+                        <div class="section-header"><i class="fas fa-list-check"></i><h2>Approval chain</h2></div>
+                        <p class="hint">Each request goes to these external approvers in order, then to a final administrator. The final step is always an authenticated administrator and cannot be removed or reassigned. External approvers need no account: they confirm their identity with a one-time code sent to the address below.</p>
+                        <div id="wf-steps"></div>
+                        <button type="button" class="reserve-btn secondary" id="wf-add">Add an approver</button>
+                        <div class="field-row spaced">
+                            <label>Hours each step may take before the request expires
+                                <input id="wf-hours" type="number" min="1" max="168" step="1">
+                            </label>
+                        </div>
+                        <p class="hint" id="wf-preview"></p>
+                        <p class="notice error" id="wf-error" role="alert" hidden></p>
+                        <p class="notice" id="wf-notice" role="status" hidden></p>
+                        <div class="actions">
+                            <button type="submit" class="reserve-btn" id="wf-save">Save approval chain</button>
+                        </div>
+                        <p class="hint" id="wf-meta"></p>
+                    </form>
+                </section>
+
+                <!-- Operations -->
+                <section id="view-ops" class="view" hidden>
+                    <div class="panel">
+                        <div class="section-header"><i class="fas fa-hourglass-half"></i><h2>Waiting on approvers</h2></div>
+                        <p class="state" id="ops-approvals-state" hidden></p>
+                        <div class="table-scroll" id="ops-pending"></div>
+                        <h3>Recently expired requests</h3>
+                        <p class="hint">An expired request is finished by design: the room is released and the student submits a new one.</p>
+                        <div class="table-scroll" id="ops-expired"></div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="section-header"><i class="fas fa-envelope"></i><h2>Email delivery</h2></div>
+                        <dl class="facts" id="ops-email-counts"></dl>
+                        <div class="toolbar">
+                            <label>Show
+                                <select id="ops-email-status">
+                                    <option value="failed">Failed</option>
+                                    <option value="queued">Queued (including retrying)</option>
+                                    <option value="sending">Sending</option>
+                                    <option value="sent">Sent</option>
+                                </select>
+                            </label>
+                        </div>
+                        <p class="state" id="ops-email-state" hidden></p>
+                        <div class="table-scroll" id="ops-emails"></div>
+                        <p class="notice" id="ops-email-feedback" role="status" hidden></p>
+                        <p class="hint">Message text is never shown here: it can contain one-time codes and approval links. A failed message that held a one-time code cannot be sent again; the approver asks for a new code on the approval page.</p>
+                    </div>
+
+                    <div class="panel">
+                        <div class="section-header"><i class="fas fa-stethoscope"></i><h2>Consistency check</h2></div>
+                        <p class="hint">Compares seats, stubs, room holds and approval links with each other. It only reads. Repairs are run by an operator with <code>npm run reconcile</code>.</p>
+                        <div class="actions"><button type="button" class="reserve-btn" id="ops-diag-run">Run check</button></div>
+                        <div id="ops-diag" aria-live="polite"></div>
+                    </div>
+                </section>
+
+                <!-- Audit log -->
+                <section id="view-audit" class="view" hidden>
+                    <form id="audit-form" class="toolbar" novalidate>
+                        <label>Filter by
+                            <select id="audit-filter-kind">
+                                <option value="action">Event type</option>
+                                <option value="target">Ticket, reservation or user ID</option>
+                            </select>
+                        </label>
+                        <label>Value
+                            <input id="audit-filter" autocomplete="off" spellcheck="false" maxlength="80" placeholder="reservation.approved or RS-0123456789">
+                        </label>
+                        <button type="submit" class="reserve-btn">Apply</button>
+                    </form>
+                    <p class="notice error" id="audit-error" role="alert" hidden></p>
+                    <p class="state" id="audit-state" hidden></p>
+                    <section class="panel table-panel" id="audit-table-wrap" hidden>
+                        <table class="rooms-table">
+                            <thead>
+                                <tr><th scope="col">When</th><th scope="col">Event</th><th scope="col">Who</th><th scope="col">Related to</th><th scope="col">Outcome</th><th scope="col">Reason</th></tr>
+                            </thead>
+                            <tbody id="audit-rows"></tbody>
+                        </table>
+                    </section>
+                    <div class="actions"><button type="button" class="reserve-btn secondary" id="audit-more" hidden>Load older entries</button></div>
+                </section>
+
+                <!-- Settings -->
+                <section id="view-settings" class="view" hidden>
+                    <p class="state" data-state></p>
+                    <form id="settings-form" class="panel form-panel" hidden novalidate>
+                        <div class="section-header">
+                            <i class="fas fa-gear"></i>
+                            <h2>System settings</h2>
+                        </div>
+                        <p class="hint">Changes apply to tickets and reservations created from now on. Anything already issued keeps its original terms.</p>
+                        <div class="field-grid" id="settings-fields"></div>
+                        <p class="notice error" id="settings-error" role="alert" hidden></p>
+                        <p class="notice" id="settings-notice" role="status" hidden></p>
+                        <div class="actions">
+                            <button type="submit" class="reserve-btn" id="settings-save">Save settings</button>
+                        </div>
+                        <p class="hint" id="settings-meta"></p>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

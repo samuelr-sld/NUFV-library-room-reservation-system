@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "demo-nufv",
+    "prod": "lrc-room-reservation"
+  }
+}

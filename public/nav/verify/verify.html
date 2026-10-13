@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" hidden data-role="student">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify your email - National University Philippines</title>
+    <link rel="stylesheet" href="../main/main.css">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Verify your email</h1>
+                <div class="header-actions">
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">User</div>
+                            <div class="student-course" id="account-email"></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <section class="panel verify-panel">
+                    <div class="section-header">
+                        <i class="fas fa-envelope-circle-check"></i>
+                        <h2>One more step before you can use library services</h2>
+                    </div>
+                    <p>To reserve rooms and seats you need a verified email address. We sent a verification link to the address you registered with.</p>
+                    <ol class="requirements">
+                        <li>Open the email titled "Verify your email" (check your spam folder too).</li>
+                        <li>Select the link in that email.</li>
+                        <li>Come back here and choose <strong>I have verified my email</strong>.</li>
+                    </ol>
+                    <div class="actions">
+                        <button type="button" class="reserve-btn" id="refresh">I have verified my email</button>
+                        <button type="button" class="reserve-btn secondary" id="resend">Send the email again</button>
+                    </div>
+                    <p id="status" class="notice" role="status"></p>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="verify.js"></script>
+</body>
+</html>

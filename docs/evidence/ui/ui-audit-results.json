@@ -1,0 +1,182 @@
+[
+  {
+    "page": "login",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "register",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "forgot-password",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "terms",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "approver-page",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "verify-email",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "student-home",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "student-reserve",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "student-stubs",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "student-reservations",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-overview",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-resources",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-tickets",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-reservations",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-workflow",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-ops",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-audit",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "admin-settings",
+    "viewport": "desktop",
+    "issues": []
+  },
+  {
+    "page": "login",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "register",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "forgot-password",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "terms",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "approver-page",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "verify-email",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "student-home",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "student-reserve",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "student-stubs",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "student-reservations",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-overview",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-resources",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-tickets",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-reservations",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-workflow",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-ops",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-audit",
+    "viewport": "mobile",
+    "issues": []
+  },
+  {
+    "page": "admin-settings",
+    "viewport": "mobile",
+    "issues": []
+  }
+]

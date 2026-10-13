@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" hidden data-role="student" data-require-verified>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Stubs - National University Philippines</title>
+    <link rel="stylesheet" href="../main/main.css">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="stubs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar no-print">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Student">
+                <a href="../main/main.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../reserve/reserve.html" class="menu-item">
+                    <i class="fas fa-door-open"></i>
+                    <span>Reserve Room</span>
+                </a>
+                <a href="../stubs/stubs.html" class="menu-item active" aria-current="page">
+                    <i class="fas fa-ticket"></i>
+                    <span>Generate Stubs</span>
+                </a>
+                <a href="../reservations/reservations.html" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>My Reservations</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header no-print">
+                <h1>Generate Stubs</h1>
+                <div class="header-actions">
+                    <div class="profile-section">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">User</div>
+                            <div class="student-course">Student</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <section class="panel no-print" id="chooser">
+                    <div class="section-header">
+                        <i class="fas fa-ticket"></i>
+                        <h2>Choose a service</h2>
+                    </div>
+                    <p class="hint">Pick a service and we will assign the next free seat or station for you. You cannot choose a specific one.</p>
+
+                    <div class="service-grid" id="service-grid" role="group" aria-label="Services"></div>
+
+                    <p class="state" data-state></p>
+                    <p class="notice" id="active-summary" role="status"></p>
+
+                    <div class="actions">
+                        <button type="button" class="reserve-btn" id="generate" disabled>Generate stub</button>
+                    </div>
+                    <p class="notice error" id="error" role="alert" hidden></p>
+                    <p class="notice" id="message" role="status" hidden></p>
+                </section>
+
+                <section id="stub-view" class="stub-view" hidden>
+                    <article class="stub" id="stub" aria-label="Library stub">
+                        <header class="stub-head">
+                            <img src="../../assets/NU_shield.svg" alt="" class="stub-logo">
+                            <div>
+                                <div class="stub-org">NATIONAL UNIVERSITY FAIRVIEW</div>
+                                <div class="stub-sub">Library Services</div>
+                            </div>
+                        </header>
+
+                        <div class="stub-service" id="stub-service"></div>
+                        <div class="stub-assignment" id="stub-assignment"></div>
+                        <div class="demo-banner" id="stub-demo" hidden>DEMO CREDENTIAL &mdash; NOT A REAL UNIVERSITY WI-FI PASSWORD</div>
+                        <div class="stub-password" id="stub-password" hidden>
+                            <span class="label">DEMO password</span>
+                            <code id="stub-password-value"></code>
+                        </div>
+                        <p class="stub-password-note" id="stub-password-note" hidden></p>
+
+                        <div class="stub-body">
+                            <dl class="stub-facts">
+                                <div><dt>Ticket ID</dt><dd id="stub-id"></dd></div>
+                                <div><dt>Student</dt><dd id="stub-student"></dd></div>
+                                <div><dt>Student no.</dt><dd id="stub-number"></dd></div>
+                                <div><dt>Issued</dt><dd id="stub-issued"></dd></div>
+                                <div><dt>Expires</dt><dd id="stub-expires"></dd></div>
+                                <div id="stub-checkin-row"><dt>Check in by</dt><dd id="stub-checkin"></dd></div>
+                                <div><dt>Status</dt><dd id="stub-status"></dd></div>
+                            </dl>
+                            <figure class="stub-qr">
+                                <img id="stub-qr" alt="QR code for this stub" width="150" height="150">
+                                <figcaption>Show this code at the library desk.</figcaption>
+                            </figure>
+                        </div>
+                        <p class="stub-foot" id="stub-foot"></p>
+                    </article>
+
+                    <div class="actions no-print">
+                        <button type="button" class="reserve-btn" id="print">Print stub</button>
+                        <button type="button" class="reserve-btn secondary" id="close-stub">Close</button>
+                    </div>
+                </section>
+
+                <section class="panel no-print" id="my-stubs">
+                    <div class="section-header">
+                        <i class="fas fa-clock-rotate-left"></i>
+                        <h2>My stubs</h2>
+                    </div>
+                    <h3 class="subhead">Active</h3>
+                    <p class="hint" id="active-empty">You have no active stubs.</p>
+                    <ul class="stub-list" id="active-list"></ul>
+                    <h3 class="subhead">History</h3>
+                    <p class="hint" id="history-empty">Nothing here yet.</p>
+                    <div class="table-wrap" id="history-wrap" hidden>
+                        <table class="rooms-table">
+                            <thead>
+                                <tr><th>Ticket ID</th><th>Service</th><th>Status</th><th>Issued</th><th></th></tr>
+                            </thead>
+                            <tbody id="history-rows"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="stubs.js"></script>
+</body>
+</html>

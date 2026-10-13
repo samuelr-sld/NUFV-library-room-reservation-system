@@ -1,0 +1,26 @@
+/* My Reservations and the reservation progress tracker (also used by the administrator view). */
+
+.res-card { border: 1px solid #e3e7ef; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+.res-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.res-title { font-weight: 700; color: #0c235a; font-size: 16px; }
+.res-meta { color: #555; font-size: 13px; }
+.res-purpose { margin: 8px 0 14px; color: #333; font-size: 14px; }
+
+.status.confirmed { background: #e1f4e3; color: #1b5e20; }
+.status.pending { background: #fff4d6; color: #8a5a00; }
+.status.rejected, .status.cancelled, .status.expired { background: #fde2e4; color: #9b1c2c; }
+
+/* Approval progress: one dot per step, in order */
+.tracker { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 6px 0 12px; padding: 0; }
+.tracker li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
+.tracker .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #b8bfce; background: white; flex: none; }
+.tracker .approved .dot { background: #2e7d32; border-color: #2e7d32; }
+.tracker .current .dot { background: #ffd700; border-color: #0c235a; }
+.tracker .rejected .dot, .tracker .stopped .dot { background: #b00020; border-color: #b00020; }
+.tracker .skipped, .tracker .waiting { color: #888; }
+.tracker .current { font-weight: 600; color: #0c235a; }
+
+.res-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.history { margin: 12px 0 0; padding: 0; list-style: none; font-size: 13px; color: #444; }
+.history li { padding: 4px 0; border-bottom: 1px solid #eef0f4; }
+.reason { font-size: 13px; color: #9b1c2c; margin: 4px 0 0; }

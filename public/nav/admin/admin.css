@@ -1,0 +1,154 @@
+/* Administrator pages and the verification page. Builds on ../main/main.css; only what that file lacks lives here. */
+
+[hidden] { display: none !important; }
+
+.panel {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.panel h2, .panel h3 { color: #0c235a; }
+.panel p { line-height: 1.6; color: #444; margin-bottom: 12px; }
+.panel .section-header { margin-bottom: 14px; }
+.panel .section-header .link-button { margin-left: auto; }
+
+.link-button {
+    color: #0c235a;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.link-button:hover { text-decoration: underline; }
+
+/* Overview cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #ffd700;
+}
+
+.card h3 { font-size: 15px; color: #0c235a; display: flex; align-items: center; gap: 10px; }
+.card .total { font-size: 34px; font-weight: 700; color: #0c235a; margin: 8px 0 12px; }
+.card .total small { font-size: 13px; font-weight: 500; color: #666; margin-left: 6px; }
+.card ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 13px; color: #444; }
+.card li { display: flex; justify-content: space-between; }
+.card li strong { color: #0c235a; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 24px; }
+.facts div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid #eef0f4; padding-bottom: 6px; font-size: 14px; }
+.facts dt { color: #555; }
+.facts dd { font-weight: 600; color: #0c235a; }
+
+/* Status badges beyond the available / in-use pair already in main.css */
+.status.maintenance { background: #fff4d6; color: #8a5a00; }
+.status.retired { background: #e6e8ee; color: #555; }
+.status.assigned { background: #e6efff; color: #0c235a; }
+
+/* Ticket operations */
+.video-wrap { margin-bottom: 12px; }
+.video-wrap video { width: 100%; max-width: 480px; border-radius: 8px; background: #000; display: block; }
+.banner { border-radius: 8px; padding: 12px 16px; font-weight: 600; font-size: 14px; margin-bottom: 14px; }
+.banner.info { background: #e6efff; color: #0c235a; }
+.banner.ok { background: #e1f4e3; color: #1b5e20; }
+.banner.muted { background: #e6e8ee; color: #444; }
+.banner.bad { background: #fde2e4; color: #9b1c2c; }
+.action-block { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.checkbox-row { flex-direction: row; align-items: center; gap: 8px; font-weight: 500; }
+.checkbox-row input { min-width: 0; }
+.revoke-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; width: 100%; }
+.revoke-form[hidden] { display: none; }
+textarea { font: inherit; padding: 9px 12px; border: 1px solid #c9cfdb; border-radius: 6px; min-width: 260px; flex: 1 1 260px; }
+#manual-form { margin-top: 14px; align-items: flex-end; }
+
+/* Reservation queue and approval chain editor */
+.wf-step { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; border: 1px solid #e3e7ef; border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
+.wf-step label { flex: 1 1 200px; }
+.wf-step input[type="text"], .wf-step input[type="email"] { width: 100%; }
+.wf-step .checkbox-row { flex: 0 0 auto; padding-bottom: 8px; }
+.wf-num { font-weight: 700; color: #0c235a; align-self: center; }
+.wf-buttons { display: flex; gap: 6px; padding-bottom: 4px; }
+#res-actions textarea { width: 100%; margin: 12px 0 0; }
+#res-actions input[type="text"] { flex: 1 1 260px; }
+#manual-ref { width: min(340px, calc(100vw - 80px)); }
+#view-tickets .toolbar .reserve-btn { margin-left: 0; }
+
+/* Loading, empty and error states */
+.state { text-align: center; color: #555; padding: 40px 10px; }
+.state[hidden] { display: none; }
+.state.error { color: #b00020; }
+.state button { margin-left: 10px; }
+
+.notice { font-size: 14px; margin: 10px 0 0; color: #1b5e20; }
+.notice.error { color: #b00020; }
+.hint { font-size: 13px; color: #666; }
+
+/* Toolbar and forms */
+.toolbar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+.toolbar .reserve-btn { margin-left: auto; }
+
+label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #333; }
+input, select {
+    font: inherit;
+    font-weight: 400;
+    padding: 9px 12px;
+    border: 1px solid #c9cfdb;
+    border-radius: 6px;
+    background: white;
+    min-width: 160px;
+}
+input:focus, select:focus, button:focus-visible, a:focus-visible { outline: 2px solid #0c235a; outline-offset: 2px; }
+input[aria-invalid="true"] { border-color: #b00020; }
+input[readonly], input:disabled, select:disabled { background: #f0f2f6; color: #666; }
+
+.form-panel h3 { margin-bottom: 14px; }
+.field-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.field-row.spaced { margin-top: 16px; }
+.field-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 8px; }
+.field-grid input, .field-grid select { width: 100%; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+
+.reserve-btn.secondary { background: white; color: #0c235a; border: 1px solid #0c235a; }
+.reserve-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.reserve-btn.small { padding: 6px 12px; font-size: 12px; }
+.reserve-btn.danger { background: #b00020; }
+
+.table-panel { padding: 10px 25px 20px; overflow-x: auto; }
+.rooms-table .row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.requirements { margin: 0 0 8px 22px; line-height: 1.9; color: #444; }
+
+/* Operations and audit log */
+.table-scroll { overflow-x: auto; margin-bottom: 14px; }
+.panel h3 { margin: 18px 0 6px; }
+.panel details { margin-top: 10px; }
+.panel summary { cursor: pointer; font-weight: 600; color: #0c235a; }
+.diag-items { background: #f5f6fa; padding: 10px; border-radius: 6px; overflow-x: auto; font-size: 12px; margin-top: 8px; }
+code { background: #eef0f4; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+#audit-filter { width: min(340px, calc(100vw - 80px)); }
+.rooms-table th, .rooms-table td { overflow-wrap: anywhere; }
+
+@media (max-width: 720px) {
+    .toolbar .reserve-btn { margin-left: 0; }
+    .panel { padding: 18px 16px; }
+    .table-panel { padding: 8px 12px 16px; }
+    .toolbar { gap: 12px; }
+    .table-scroll .rooms-table, .table-panel .rooms-table { min-width: 560px; }
+    .toolbar label, .toolbar select, .toolbar input { width: 100%; }
+}
+
+/* "Demo mode: no real email" note (local demo only) on the verification page */
+.form-notice { font-size: 14px; line-height: 1.4; margin: 10px 0 0; color: #1b5e20; }
+.form-notice.demo-mail { background: #fff4d6; color: #5c3b00; border-radius: 8px; padding: 10px 12px; }
+.form-notice.demo-mail a { color: inherit; font-weight: 600; }

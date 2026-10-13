@@ -1,0 +1,290 @@
+[
+  {
+    "id": "ST-01",
+    "area": "Student",
+    "name": "Registration form validates, then creates the account",
+    "expected": "An empty or inconsistent form goes nowhere; a valid one tells the student to verify email and returns to Login",
+    "actual": "empty submit blocked by the browser; mismatched passwords flagged (4 field(s)); then the corrected form: Login now says \"Account created. Check your email to verify your address, then log in.\"",
+    "status": "PASS",
+    "evidence": "evidence/ST-01.jpg"
+  },
+  {
+    "id": "ST-02",
+    "area": "Student",
+    "name": "Email verification",
+    "expected": "An unverified account is held on the verification page; after the emailed link is opened, \"I have verified\" lets the student in",
+    "actual": "held on the verification page (\"not verified yet\"); after the link was opened, redirected to Student Home",
+    "status": "PASS",
+    "evidence": "evidence/ST-02.jpg"
+  },
+  {
+    "id": "ST-03",
+    "area": "Student",
+    "name": "Student Home shows real data only",
+    "expected": "Three demo rooms with status for now, no upcoming reservations, an honest announcements notice, the student number",
+    "actual": "rooms: Discussion Room A = Free now; Discussion Room B = Free now; Discussion Room C = Free now; \"You have no upcoming reservations.\"; Student no. DEMO-1001",
+    "status": "PASS",
+    "evidence": "evidence/ST-03.jpg"
+  },
+  {
+    "id": "ST-04",
+    "area": "Student",
+    "name": "Password recovery",
+    "expected": "The reset page gives the same answer for any address; the emailed link sets a new password that then works, the old one does not",
+    "actual": "same message for a real and an unknown address (\"If an account exists for that email, a p...\"); reset link worked once; old password refused; new password signs in",
+    "status": "PASS",
+    "evidence": "evidence/ST-04.jpg"
+  },
+  {
+    "id": "ST-05",
+    "area": "Student",
+    "name": "Sign-in errors and denied accounts",
+    "expected": "Wrong password and unknown user look identical; the suspended and the unverified accounts are handled",
+    "actual": "\"Incorrect email or password.\" (both wrong password and unknown user); suspended: \"This account is not active. Please contact the library.\"",
+    "status": "PASS",
+    "evidence": ""
+  },
+  {
+    "id": "A-01",
+    "area": "Scenario A",
+    "name": "Nora generates a Silent Room stub",
+    "expected": "A stub with a seat, a stub id and a QR code; it appears under Active stubs and in History",
+    "actual": "Silent Seat 1, SR-M464KN87Z4, QR decodes to NUFV1:tuY-EqIhnKuOBNHoz3gByg4u; 1 active, 1 in history",
+    "status": "PASS",
+    "evidence": "evidence/A-01.jpg"
+  },
+  {
+    "id": "A-02",
+    "area": "Scenario A",
+    "name": "Administrator scans the QR payload",
+    "expected": "The scanner shows the student, the seat and \"ISSUED\"",
+    "actual": "ISSUED — Issued. Waiting for the student to check in.; Ticket ID SR-M464KN87Z4 Service Silent Room Student Nora Villanueva (DEMO-1001) Assignment Silent Seat 1 Issued Oct 13, ",
+    "status": "PASS",
+    "evidence": "evidence/A-02.jpg"
+  },
+  {
+    "id": "A-03",
+    "area": "Scenario A",
+    "name": "Check-in needs the identity confirmation",
+    "expected": "The Check in button stays disabled until the ID box is ticked; then the student is checked in",
+    "actual": "button disabled until ticked; then \"Checked in.\" and banner CHECKED IN",
+    "status": "PASS",
+    "evidence": "evidence/A-03.jpg"
+  },
+  {
+    "id": "A-04",
+    "area": "Scenario A",
+    "name": "Check-out frees the seat",
+    "expected": "The stub becomes \"CHECKED OUT\"; the student sees it in History; the seat is free again",
+    "actual": "banner CHECKED OUT; student History shows checked out, Active empty; Silent Room card: \"Silent Room A quiet study seat, assigned to you automatically. 3 of 3 free\"",
+    "status": "PASS",
+    "evidence": "evidence/A-04.jpg"
+  },
+  {
+    "id": "B-01",
+    "area": "Scenario B",
+    "name": "Ana generates a Computer Station stub",
+    "expected": "A stub with a computer, id CS-...",
+    "actual": "Computer 1, CS-7810CPKHKB",
+    "status": "PASS",
+    "evidence": "evidence/B-01.jpg"
+  },
+  {
+    "id": "B-02",
+    "area": "Scenario B",
+    "name": "Administrator revokes it with a reason",
+    "expected": "Revoking asks for a reason; the stub becomes REVOKED; the student loses it",
+    "actual": "banner: REVOKED — Revoked: Demonstration: wrong student at the desk.; the student's Active list is empty and History shows revoked",
+    "status": "PASS",
+    "evidence": "evidence/B-02.jpg"
+  },
+  {
+    "id": "C-01",
+    "area": "Scenario C",
+    "name": "Ben generates a demo Wi-Fi voucher and retrieves its password",
+    "expected": "The voucher shows a clearly-marked demo password, the same one every time it is opened",
+    "actual": "password DEMO-L4U2-Z4PM-RQL5 (demo banner shown, same password on reopening); QR NUFV1:7V0jg6sm2_2t0edr_xve9a5X",
+    "status": "PASS",
+    "evidence": "evidence/C-01.jpg"
+  },
+  {
+    "id": "AD-01",
+    "area": "Administrator",
+    "name": "Dashboard overview",
+    "expected": "Cards for the three resource types and the current settings",
+    "actual": "3 resource cards, 9 settings facts; 3resources silent seats",
+    "status": "PASS",
+    "evidence": "evidence/AD-01.jpg"
+  },
+  {
+    "id": "AD-02",
+    "area": "Administrator",
+    "name": "Resource creation",
+    "expected": "A new computer station is added through the form and appears in the inventory",
+    "actual": "8 -> 9 resources; \"Resource added.\"",
+    "status": "PASS",
+    "evidence": "evidence/AD-02.jpg"
+  },
+  {
+    "id": "AD-03",
+    "area": "Administrator",
+    "name": "Resource validation",
+    "expected": "A duplicate identifier and an empty form are refused with a message",
+    "actual": "empty: \"Identifier and label are required.\"; duplicate: \"A resource with this id already exists.\"",
+    "status": "PASS",
+    "evidence": "evidence/AD-03.jpg"
+  },
+  {
+    "id": "AD-04",
+    "area": "Administrator",
+    "name": "Maintenance and two-step retire",
+    "expected": "Two stations go into maintenance (a status change); a throwaway seat is retired only on the second click",
+    "actual": "pc-02 and pc-03 maintenance, temp-01 retired after a second \"Confirm retire\" click (10 rows)",
+    "status": "PASS",
+    "evidence": "evidence/AD-04.jpg"
+  },
+  {
+    "id": "AD-05",
+    "area": "Administrator",
+    "name": "System settings",
+    "expected": "A setting is changed, versioned and restored",
+    "actual": "180 -> 200 (\"Settings saved (version 1).\") -> restored; 5 minutes refused: \"wifiVoucherMinutes must be between 15 and 1440.\"",
+    "status": "PASS",
+    "evidence": "evidence/AD-05.jpg"
+  },
+  {
+    "id": "AD-06",
+    "area": "Administrator",
+    "name": "Scanner rejects what is not a library code",
+    "expected": "Garbage gets a clear message; an unknown but well-formed code is \"no match\"",
+    "actual": "\"That is not a library code. Scan the QR code on a stub or a ...\"; unknown stub: \"No stub matches this code.\"; unknown reservation: \"No reservation matches this code.\"",
+    "status": "PASS",
+    "evidence": "evidence/AD-06.jpg"
+  },
+  {
+    "id": "D-01",
+    "area": "Scenario D",
+    "name": "Carla submits a reservation (form validation first)",
+    "expected": "An incomplete form is refused in place; a complete one is submitted and waits for the Dean",
+    "actual": "empty form: blocked by the browser's required-field check (form invalid); no request sent; then: \"Request submitted (RS-Y0XMJBXNRC). It is waiting for: College Dean. Follow its progress in My Reservations\"",
+    "status": "PASS",
+    "evidence": "evidence/D-01.jpg"
+  },
+  {
+    "id": "D-02",
+    "area": "Scenario D",
+    "name": "The Dean approves through the emailed link",
+    "expected": "Link -> request a code -> code from the email -> review shows the student and room -> approve",
+    "actual": "review showed: Requested by Carla Lim (DEMO-0003) Room Discussion Room A Date 2026-10-14 Time 09:00 – 10:00 (Asia/Manila) Participants 2: Carla L; result: \"Approved\"",
+    "status": "PASS",
+    "evidence": "evidence/D-02.jpg"
+  },
+  {
+    "id": "D-03",
+    "area": "Scenario D",
+    "name": "The Library Adviser approves next, only after the Dean",
+    "expected": "The second approver is notified only now; approving moves it to the final administrator",
+    "actual": "student's progress: College Dean: approved | Library Adviser: approved | Final administrator approval: waiting for a decision",
+    "status": "PASS",
+    "evidence": "evidence/D-03.jpg"
+  },
+  {
+    "id": "D-04",
+    "area": "Scenario D",
+    "name": "Administrator gives the final approval",
+    "expected": "The request appears as \"Needs your decision\"; approving confirms the booking",
+    "actual": "\"Approved. The booking is confirmed.\"",
+    "status": "PASS",
+    "evidence": "evidence/D-04.jpg"
+  },
+  {
+    "id": "D-05",
+    "area": "Scenario D",
+    "name": "The student gets a confirmation with a QR; the administrator verifies it",
+    "expected": "The confirmation shows reference RC-..., its QR decodes to NUFR1:..., and scanning it shows a confirmed booking that is not valid yet",
+    "actual": "confirmation RC-1RJE4636TW; QR NUFR1:2wKiTZ9mNjF8D1_NQdkw2q4i; scanner: CONFIRMED — Not valid right now. The booking has not started yet.",
+    "status": "PASS",
+    "evidence": "evidence/D-05.jpg"
+  },
+  {
+    "id": "D-06",
+    "area": "Scenario D",
+    "name": "A rejection reaches the student with its reason",
+    "expected": "The Dean rejects with a comment; the student sees Rejected and the reason; the room is released",
+    "actual": "Dean: \"Rejected\"; student sees: \"Reason given: Room reserved for a faculty meeting\"",
+    "status": "PASS",
+    "evidence": "evidence/D-06.jpg"
+  },
+  {
+    "id": "E-01",
+    "area": "Scenario E",
+    "name": "Two students race for the last free computer station",
+    "expected": "Exactly one gets a stub; the other is told none is free",
+    "actual": "winner: eli; the other saw: \"No computer station seat is free right now. Please try again later.\"",
+    "status": "PASS",
+    "evidence": "evidence/E-01.jpg"
+  },
+  {
+    "id": "E-02",
+    "area": "Scenario E",
+    "name": "Two students submit the same room and time at the same moment",
+    "expected": "Exactly one request is accepted; the other is told the slot is taken",
+    "actual": "winner dev.patel (RS-3DAVFP7VCN); the other saw: \"That room is already reserved or being reviewed for part of this time. Choose another time or room.\"",
+    "status": "PASS",
+    "evidence": "evidence/E-02.jpg"
+  },
+  {
+    "id": "F-01",
+    "area": "Scenario F",
+    "name": "The winner cancels (two-step) and the room is released",
+    "expected": "Cancel asks for a second click; the reservation shows cancelled",
+    "actual": "\"Reservation cancelled. The room is free for others.\"; card status: cancelled",
+    "status": "PASS",
+    "evidence": "evidence/F-01.jpg"
+  },
+  {
+    "id": "F-02",
+    "area": "Scenario F",
+    "name": "The other student now gets the same slot",
+    "expected": "The same room and time that was refused a moment ago is accepted",
+    "actual": "\"Request submitted (RS-EXVJ2WKMX3). It is waiting for: College Dean. Follow its progress in\"",
+    "status": "PASS",
+    "evidence": "evidence/F-02.jpg"
+  },
+  {
+    "id": "AD-07",
+    "area": "Administrator",
+    "name": "Reservation management",
+    "expected": "Statuses are filterable; confirmed, rejected, cancelled and pending requests are each listed",
+    "actual": "rows per status: {\"pending\":1,\"confirmed\":1,\"rejected\":1,\"cancelled\":1}",
+    "status": "PASS",
+    "evidence": "evidence/AD-07.jpg"
+  },
+  {
+    "id": "AD-08",
+    "area": "Administrator",
+    "name": "Approval workflow configuration",
+    "expected": "The chain is edited (step time), saved with a new version, and restored",
+    "actual": "2 approvers; 48 h -> 24 h saved (\"Version 2, last changed Oct 13, 2026, 12:24 PM.\") -> restored",
+    "status": "PASS",
+    "evidence": "evidence/AD-08.jpg"
+  },
+  {
+    "id": "AD-09",
+    "area": "Administrator",
+    "name": "Audit log",
+    "expected": "Events are listed newest first with who and why; filtering by event type works",
+    "actual": "26 events; filtered \"ticket.revoked\": ticket.revoked | Demo Administrator (admin) | Demonstration: wrong student at the desk",
+    "status": "PASS",
+    "evidence": "evidence/AD-09.jpg"
+  },
+  {
+    "id": "AD-10",
+    "area": "Administrator",
+    "name": "Operations and diagnostics",
+    "expected": "Pending approval steps and email counts are shown; the consistency check agrees with itself",
+    "actual": "waiting on approvers: ; email: queued 0 sending 0 failed 0 sent 11; \"Everything agrees (checked Oct 13, 2026, 12:24 PM).\"",
+    "status": "PASS",
+    "evidence": "evidence/AD-10.jpg"
+  }
+]
