@@ -27,7 +27,7 @@ async function loadRooms() {
       const taken = room.busy.some((b) => now >= b.start && now < b.end);
       const [label, cls, why] = !open ? ['Closed', 'in-use', `Open ${rules.open} to ${rules.close}`] : taken ? ['Taken now', 'in-use', 'Booked, or held while a request is being reviewed'] : ['Free now', 'available', 'No booking or pending request covers this moment'];
       return h('tr', {},
-        h('td', {}, room.label),
+        h('td', {}, room.label, room.description ? h('div', { class: 'home-note' }, room.description) : ''),
         h('td', {}, h('i', { class: 'fas fa-users', 'aria-hidden': 'true' }), ` ${room.capacity}`),
         h('td', {}, h('span', { class: `status ${cls}`, title: why }, label)),
         h('td', {}, h('a', { href: '../reserve/reserve.html', class: 'reserve-btn' }, 'Reserve')));

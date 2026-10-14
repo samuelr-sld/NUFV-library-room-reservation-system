@@ -88,3 +88,7 @@
     .stub-password { border-color: #000; }
     .demo-banner { background: #000; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+.resource-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 16px; padding: 0; font-size: 13px; }
+.resource-chips li { border: 1px solid #e3e7ef; border-radius: 8px; padding: 4px 10px; }
+#resource-list h3 { font-size: 14px; color: #0c235a; margin-top: 12px; }

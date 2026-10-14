@@ -391,7 +391,7 @@ export async function bookingRules({ db, now }) {
 
 export async function listRooms(db) {
   const rooms = await db.collection('resources').where('type', '==', 'discussion-room').where('status', '==', 'active').get();
-  return rooms.docs.map((d) => ({ id: d.id, label: d.get('label'), capacity: d.get('capacity') })).sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));
+  return rooms.docs.map((d) => ({ id: d.id, label: d.get('label'), description: d.get('description') ?? '', capacity: d.get('capacity') })).sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }));
 }
 
 // Taken time per room on one local date. Advisory: the transaction in submitReservation is what decides.

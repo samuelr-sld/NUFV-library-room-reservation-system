@@ -56,6 +56,15 @@ function renderCards() {
   }));
 }
 
+// Every active seat and station with its own status. Informational: the server still picks which one you get.
+function renderResources() {
+  $('#resource-list').replaceChildren(...Object.entries(SERVICES).flatMap(([key, info]) => {
+    const list = availability?.services[key]?.resources ?? [];
+    return list.length ? [h('h3', {}, info.title), h('ul', { class: 'resource-chips' }, ...list.map((r) =>
+      h('li', { title: r.description || null }, `${r.label} `, h('span', { class: `status ${r.available ? 'available' : 'in-use'}` }, r.available ? 'Free' : 'In use'))))] : [];
+  }));
+}
+
 function syncGenerate() {
   const a = availability?.services[selected];
   $('#generate').disabled = busy || !selected || !!(a && !a.unlimited && a.available === 0);
@@ -73,6 +82,7 @@ async function loadAvailability() {
     state.textContent = err.message;
   }
   renderCards();
+  renderResources();
   syncGenerate();
 }
 

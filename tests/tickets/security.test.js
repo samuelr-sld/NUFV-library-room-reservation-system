@@ -128,12 +128,20 @@ test('history is newest first, limited, validated, and survives expiry', async (
 test('availability is advisory and accurate: counts free seats, ignores maintenance, reports the limit', async () => {
   await h.seats('silent-seat-01', 'silent-seat-02');
   await h.seed('silent-seat-03', 'silent-seat', { status: 'maintenance' });
+  await h.seed('silent-seat-04', 'silent-seat', { description: 'Window side' });
   await h.pcs('pc-01');
   const s = await h.student();
   await issue(s, 'silent-room');
   const a = (await call(s, 'GET', '/api/tickets/availability')).body;
-  assert.deepEqual(a.services['silent-room'], { label: 'Silent Room', total: 2, available: 1, unlimited: false });
-  assert.deepEqual(a.services['computer-station'], { label: 'Computer Station', total: 1, available: 1, unlimited: false });
+  const silent = a.services['silent-room'];
+  assert.deepEqual({ total: silent.total, available: silent.available }, { total: 3, available: 2 });
+  // Every active seat is listed with its own status; maintenance seats are not, and no allocation detail leaks.
+  assert.equal(silent.resources.length, 3);
+  assert.deepEqual(silent.resources.map((r) => r.id).sort(), ['silent-seat-01', 'silent-seat-02', 'silent-seat-04']);
+  assert.equal(silent.resources.filter((r) => !r.available).length, 1);
+  assert.deepEqual(silent.resources.find((r) => r.id === 'silent-seat-04'), { id: 'silent-seat-04', label: 'SILENT-SEAT-04', description: 'Window side', available: true });
+  assert.equal(a.services['computer-station'].total, 1);
+  assert.equal(a.services['computer-station'].resources[0].available, true);
   assert.equal(a.services['wifi-voucher'].unlimited, true);
   assert.deepEqual({ limit: a.limit, active: a.active }, { limit: 1, active: 1 });
 });

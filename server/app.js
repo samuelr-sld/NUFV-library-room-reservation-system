@@ -1,6 +1,7 @@
 import express from 'express';
 import { errorHandler, notFound, HttpError } from './errors.js';
 import { studentsRouter } from './routes/students.js';
+import { profileRouter } from './routes/profile.js';
 import { adminRouter } from './routes/admin.js';
 import { ticketsRouter } from './routes/tickets.js';
 import { reservationsRouter } from './routes/reservations.js';
@@ -41,6 +42,7 @@ export function createApp({ config, auth, db, clock = () => new Date(), limits =
   app.use(cors(config.corsOrigins));
   app.use(express.json({ limit: '10kb' }));
   app.use('/api/students', studentsRouter({ auth, db }));
+  app.use('/api/profile', profileRouter({ auth, db }));
   app.use('/api/admin', adminRouter({ auth, db, config, clock, mailer }));
   app.use('/api/tickets', ticketsRouter({ auth, db, config, clock }));
   app.use('/api/reservations', reservationsRouter({ auth, db, config, clock, mailer, limits }));

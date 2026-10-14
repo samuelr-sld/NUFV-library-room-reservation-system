@@ -28,7 +28,7 @@ export function present(snap) {
   const d = snap.data();
   const allocation = { assigned: 0, occupied: 0, held: 0, ...d.allocation };
   return {
-    id: snap.id, type: d.type, label: d.label, capacity: d.capacity ?? null, status: d.status,
+    id: snap.id, type: d.type, label: d.label, description: d.description ?? '', capacity: d.capacity ?? null, status: d.status,
     allocation, available: d.status === 'active' && inUse(allocation) === 0,
     createdAt: iso(d.createdAt), updatedAt: iso(d.updatedAt), createdBy: d.createdBy, updatedBy: d.updatedBy,
   };
@@ -39,6 +39,13 @@ function checkLabel(label) {
   const v = label.trim();
   if (v.length < 1 || v.length > 80 || /[\u0000-\u001f]/.test(v)) throw invalid('label must be 1 to 80 characters.');
   return v;
+}
+
+function checkDescription(v) {
+  if (typeof v !== 'string') throw invalid('description must be text.');
+  const t = v.trim();
+  if (t.length > 200 || /[\u0000-\u001f]/.test(t)) throw invalid('description can be at most 200 characters.');
+  return t;
 }
 
 function checkCapacity(type, capacity) {
@@ -54,13 +61,14 @@ const plainObject = (b) => b !== null && typeof b === 'object' && !Array.isArray
 
 export async function createResource({ db, uid, body }) {
   if (!plainObject(body)) throw invalid('Request body must be a JSON object.');
-  const allowed = ['id', 'type', 'label', 'capacity', 'status'];
+  const allowed = ['id', 'type', 'label', 'description', 'capacity', 'status'];
   for (const k of Object.keys(body)) if (!allowed.includes(k)) throw invalid(`Unknown field "${k}".`);
 
   const { id, type } = body;
   if (!isValidId(id)) throw invalid('id must be 3 to 40 characters: lowercase letters, digits and single hyphens, e.g. silent-seat-01.');
   if (!TYPES.includes(type)) throw invalid(`type must be one of ${TYPES.join(', ')}.`);
   const label = checkLabel(body.label);
+  const description = checkDescription(body.description === undefined ? '' : body.description);
   const capacity = checkCapacity(type, body.capacity);
   const status = body.status ?? 'active';
   if (!['active', 'maintenance'].includes(status)) throw invalid('A new resource must start as active or maintenance.');
@@ -69,22 +77,22 @@ export async function createResource({ db, uid, body }) {
     // create() fails if the id exists, so two admins racing for the same id cannot both succeed.
     if ((await tx.get(ref(db, id))).exists) throw new HttpError(409, 'already-exists', 'A resource with this id already exists.');
     tx.create(ref(db, id), {
-      type, label, capacity, status,
+      type, label, description, capacity, status,
       allocation: { assigned: 0, occupied: 0, held: 0 },
       createdAt: FieldValue.serverTimestamp(), updatedAt: FieldValue.serverTimestamp(), createdBy: uid, updatedBy: uid,
     });
-    audit(db, tx, { actorUid: uid, action: 'resource.create', targetType: 'resource', targetId: id, details: { type, label, capacity, status } });
+    audit(db, tx, { actorUid: uid, action: 'resource.create', targetType: 'resource', targetId: id, details: { type, label, capacity, status, ...(description && { description }) } });
   });
   return present(await ref(db, id).get());
 }
 
-// patch: any of label, capacity, status. action names the audit entry ('resource.update' or 'resource.retire').
+// patch: any of label, description, capacity, status. action names the audit entry ('resource.update' or 'resource.retire').
 export async function changeResource({ db, uid, id, patch, action = 'resource.update', now = new Date() }) {
   if (!isValidId(id)) throw new HttpError(404, 'not-found', 'Resource not found.');
   if (!plainObject(patch)) throw invalid('Request body must be a JSON object.');
   for (const k of Object.keys(patch)) {
     if (k === 'id' || k === 'type') throw invalid(`${k} cannot be changed.`);
-    if (!['label', 'capacity', 'status'].includes(k)) throw invalid(`Unknown field "${k}".`);
+    if (!['label', 'description', 'capacity', 'status'].includes(k)) throw invalid(`Unknown field "${k}".`);
   }
   if (!Object.keys(patch).length) throw invalid('Provide at least one field to change.');
   if ('status' in patch && !STATUSES.includes(patch.status)) throw invalid(`status must be one of ${STATUSES.join(', ')}.`);
@@ -99,6 +107,7 @@ export async function changeResource({ db, uid, id, patch, action = 'resource.up
     const changes = {};
     const set = (k, v) => { if (v !== (current[k] ?? null)) { next[k] = v; changes[k] = { from: current[k] ?? null, to: v }; } };
     if ('label' in patch) set('label', checkLabel(patch.label));
+    if ('description' in patch) { const d = checkDescription(patch.description); if (d !== (current.description ?? '')) set('description', d); }
     if ('capacity' in patch) set('capacity', checkCapacity(current.type, patch.capacity));
     if ('status' in patch && patch.status !== current.status) {
       if (!TRANSITIONS[current.status].includes(patch.status)) {

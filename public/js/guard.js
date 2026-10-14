@@ -45,6 +45,8 @@ if (result.status === 'allow') {
       el.textContent = el.classList.contains('highlight') ? `${name}!` : name;
     });
   }
+  const number = result.profile.studentNumber; // the header link shows who you are: name and student number
+  if (number) document.querySelectorAll('a.profile-section .student-course').forEach((el) => { el.textContent = number; });
   document.querySelectorAll('.logout').forEach((link) => link.addEventListener('click', async (event) => {
     event.preventDefault();
     leaving = true;

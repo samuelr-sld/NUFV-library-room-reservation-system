@@ -1,0 +1,6 @@
+/* Stacks each fact label over its value so long emails and names wrap instead of overlapping their label. */
+.facts { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.facts div { flex-direction: column; justify-content: flex-start; gap: 2px; min-width: 0; }
+.facts dd { overflow-wrap: anywhere; }
+.form-panel .field-grid { margin-bottom: 0; }
+.form-panel label { min-width: 0; }

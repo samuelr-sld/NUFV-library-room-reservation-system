@@ -31,6 +31,8 @@ test('public pages and assets keep their URLs', async () => {
     ['/nav/admin/ops-view.js', /javascript/],
     ['/nav/admin/audit-view.js', /javascript/],
     ['/nav/main/main.js', /javascript/],
+    ['/nav/profile/profile.html', /html/],
+    ['/nav/profile/profile.js', /javascript/],
     ['/register%20page/terms-popup.js', /javascript/],
     ['/js/dom.js', /javascript/],
     ['/nav/stubs/stubs.html', /html/],

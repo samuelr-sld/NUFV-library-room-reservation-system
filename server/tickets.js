@@ -317,7 +317,10 @@ export async function availability({ db, uid, now }) {
   for (const [key, spec] of Object.entries(SERVICES)) {
     if (!spec.resourceType) { services[key] = { label: spec.label, total: null, available: null, unlimited: true }; continue; }
     const mine = resources.docs.filter((d) => d.get('type') === spec.resourceType);
-    services[key] = { label: spec.label, total: mine.length, available: mine.filter((d) => inUse(d.get('allocation')) === 0).length, unlimited: false };
+    services[key] = { label: spec.label, total: mine.length, available: mine.filter((d) => inUse(d.get('allocation')) === 0).length, unlimited: false,
+      // Individual seats and stations. No allocation detail: whose stub holds a seat is not for other students.
+      resources: mine.map((d) => ({ id: d.id, label: d.get('label'), description: d.get('description') ?? '', available: inUse(d.get('allocation')) === 0 }))
+        .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true })) };
   }
   return { services, limit: settingsView(settingsSnap).settings.maxActiveTicketsPerStudent, active: active.length };
 }

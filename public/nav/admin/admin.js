@@ -48,9 +48,9 @@ async function loadOverview() {
       const s = data.byType[type];
       return h('article', { class: 'card' },
         h('h3', {}, h('i', { class: `fas ${TYPE_ICONS[type]}` }), title),
-        h('div', { class: 'total' }, String(s.total), h('small', {}, 'resources')),
+        h('div', { class: 'total' }, String(s.active), h('small', {}, 'active resources')),
         h('ul', {},
-          ...[['Available', s.available], ['Assigned', s.assigned], ['Occupied', s.occupied], ['Active', s.active], ['Maintenance', s.maintenance], ['Retired', s.retired]]
+          ...[['Available', s.available], ['Assigned', s.assigned], ['Occupied', s.occupied], ['Total', s.total], ['Maintenance', s.maintenance], ['Retired', s.retired]]
             .map(([name, n]) => h('li', {}, name, h('strong', {}, String(n))))));
     }));
 
@@ -76,7 +76,7 @@ async function loadOverview() {
 
 const resources = $('#view-resources');
 const form = $('#resource-form');
-const fields = { id: $('#f-id'), type: $('#f-type'), label: $('#f-label'), capacity: $('#f-capacity'), status: $('#f-status') };
+const fields = { id: $('#f-id'), type: $('#f-type'), label: $('#f-label'), description: $('#f-description'), capacity: $('#f-capacity'), status: $('#f-status') };
 let editing = null; // the resource being edited, or null when the form creates a new one
 
 async function loadResources() {
@@ -107,7 +107,7 @@ function resourceRow(r) {
   return h('tr', {},
     h('td', {}, r.id),
     h('td', {}, TYPE_SINGULAR[r.type]),
-    h('td', {}, r.label),
+    h('td', {}, r.label, r.description ? h('div', { class: 'hint' }, r.description) : ''),
     h('td', {}, r.capacity ?? '—'),
     h('td', {}, h('span', { class: `status ${r.status === 'active' ? 'available' : r.status}` }, r.status)),
     h('td', { title: `${r.allocation.assigned} assigned, ${r.allocation.occupied} occupied, ${r.allocation.held} held` },
@@ -157,6 +157,7 @@ function openForm(resource = null) {
   fields.id.value = resource?.id ?? '';
   fields.type.value = resource?.type ?? 'silent-seat';
   fields.label.value = resource?.label ?? '';
+  fields.description.value = resource?.description ?? '';
   fields.capacity.value = resource?.capacity ?? '';
   fields.id.readOnly = fields.type.disabled = !!resource;
   const statuses = resource ? [resource.status, ...NEXT_STATUS[resource.status]] : ['active', 'maintenance'];
@@ -180,6 +181,7 @@ form.addEventListener('submit', async (event) => {
   const error = $('#resource-error');
   say(error, '');
   const label = fields.label.value.trim();
+  const description = fields.description.value.trim();
   if (!label || (!editing && !fields.id.value.trim())) return say(error, 'Identifier and label are required.', true);
 
   const capacity = fields.capacity.value === '' ? undefined : Number(fields.capacity.value);
@@ -188,12 +190,13 @@ form.addEventListener('submit', async (event) => {
   if (editing) {
     const patch = {};
     if (label !== editing.label) patch.label = label;
+    if (description !== editing.description) patch.description = description;
     if (editing.type === 'discussion-room' && capacity !== editing.capacity) patch.capacity = capacity;
     if (fields.status.value !== editing.status) patch.status = fields.status.value;
     if (!Object.keys(patch).length) { form.hidden = true; return; }
     request = apiFetch(`/api/admin/resources/${encodeURIComponent(editing.id)}`, { method: 'PATCH', body: patch });
   } else {
-    const body = { id: fields.id.value.trim(), type: fields.type.value, label, status: fields.status.value };
+    const body = { id: fields.id.value.trim(), type: fields.type.value, label, description, status: fields.status.value };
     if (body.type === 'discussion-room') body.capacity = capacity;
     request = apiFetch('/api/admin/resources', { method: 'POST', body });
   }

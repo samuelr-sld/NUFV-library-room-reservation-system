@@ -77,7 +77,7 @@ test('the one third-party stylesheet that can be pinned is pinned (Subresource I
       pinned++;
     }
   }
-  assert.equal(pinned, 10);
+  assert.equal(pinned, 11);
   const firebaseVersions = new Set(scripts.flatMap((f) => [...readFileSync(f, 'utf8').matchAll(/firebasejs\/([0-9.]+)\//g)].map((m) => m[1])));
   assert.deepEqual([...firebaseVersions], ['13.0.0'], 'one exact, pinned SDK version everywhere (never a floating one)');
 });

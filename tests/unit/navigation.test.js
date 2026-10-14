@@ -19,6 +19,21 @@ const files = (dir, out = []) => {
 const STUDENT_PAGES = ['nav/main/main.html', 'nav/reserve/reserve.html', 'nav/stubs/stubs.html', 'nav/reservations/reservations.html'];
 const links = (html) => [...html.matchAll(/<a\s[^>]*href="([^"]*)"[^>]*class="menu-item[^"]*"[^>]*>|<a\s[^>]*class="menu-item[^"]*"[^>]*href="([^"]*)"[^>]*>/g)].map((m) => m[1] ?? m[2]);
 
+test('My Profile is reached from the header name link (no menu item) and serves both roles with the matching menu', () => {
+  for (const page of [...STUDENT_PAGES, 'nav/admin/admin.html']) {
+    const html = read(page);
+    assert.deepEqual(links(html).filter((h) => h.includes('profile')), [], `${page}: no profile menu item`);
+    assert.match(html, /<a class="profile-section" href="\.\.\/profile\/profile\.html"/, page);
+  }
+  const html = read('nav/profile/profile.html');
+  assert.doesNotMatch(html, /data-role=/, 'open to both roles; the API acts on the caller only');
+  assert.match(html, /id="nav-student"/);
+  assert.match(html, /id="nav-admin"/);
+  const code = read('nav/profile/profile.js');
+  assert.match(code, /\/api\/profile/);
+  assert.match(code, /body: { fullName, program: [^}]*address: [^}]*}/, 'only name, course and address are ever sent');
+});
+
 test('every student page offers the same four destinations and no placeholder links', () => {
   const nav = (page) => links(read(page)).filter((href) => !href.includes('login'));
   const reference = nav(STUDENT_PAGES[0]).map((h) => resolve(PUBLIC, dirname(STUDENT_PAGES[0]), h));

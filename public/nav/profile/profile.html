@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" hidden>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - National University Philippines</title>
+    <link rel="stylesheet" href="../main/main.css">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<!-- Open to both roles: the guard (no data-role) only requires an active signed-in account, and profile.js shows the menu for that role. -->
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../../assets/NU_shield.svg" alt="NU Logo" class="logo">
+                <div class="logo-text">
+                    <div class="logo-title">NATIONAL UNIVERSITY</div>
+                    <div class="logo-subtitle">FAIRVIEW</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Student" id="nav-student" hidden>
+                <a href="../main/main.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../reserve/reserve.html" class="menu-item">
+                    <i class="fas fa-door-open"></i>
+                    <span>Reserve Room</span>
+                </a>
+                <a href="../stubs/stubs.html" class="menu-item">
+                    <i class="fas fa-ticket"></i>
+                    <span>Generate Stubs</span>
+                </a>
+                <a href="../reservations/reservations.html" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>My Reservations</span>
+                </a>
+            </nav>
+
+            <nav class="sidebar-menu" aria-label="Administrator" id="nav-admin" hidden>
+                <a href="../admin/admin.html" class="menu-item">
+                    <i class="fas fa-gauge"></i>
+                    <span>Dashboard</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../../login page/login.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>My Profile</h1>
+                <div class="header-actions">
+                    <a class="profile-section" href="../profile/profile.html" aria-label="My profile">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="profile-info">
+                            <div class="student-name">User</div>
+                        </div>
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <p class="state" id="profile-state" role="status">Loading your profile...</p>
+
+                <section class="panel" id="profile-body" hidden>
+                    <div class="section-header">
+                        <i class="fas fa-id-card"></i>
+                        <h2>Account details</h2>
+                    </div>
+                    <dl class="facts" id="profile-facts"></dl>
+                    <p class="hint">Email, student number, role and verification status can only be changed by the library.</p>
+                </section>
+
+                <form class="panel form-panel" id="details-form" hidden novalidate>
+                    <h3>Your details</h3>
+                    <div class="field-grid">
+                        <label>Full name
+                            <input id="p-name" autocomplete="name" maxlength="100" required>
+                        </label>
+                        <label>Course
+                            <input id="p-program" maxlength="100" placeholder="e.g. BS Computer Science">
+                        </label>
+                        <label>Address
+                            <input id="p-address" autocomplete="street-address" maxlength="200">
+                        </label>
+                    </div>
+                    <p class="notice error" id="details-error" role="alert" hidden></p>
+                    <p class="notice" id="details-notice" role="status" hidden></p>
+                    <div class="actions">
+                        <button type="submit" class="reserve-btn" id="details-save">Save changes</button>
+                    </div>
+                </form>
+
+                <section class="panel" id="password-panel" hidden>
+                    <h3>Password</h3>
+                    <p>We will email a secure Firebase link to your account address so you can choose a new password.</p>
+                    <p class="notice" id="reset-notice" role="status" hidden></p>
+                    <div class="actions">
+                        <button type="button" class="reserve-btn" id="reset-password">Send password reset email</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="profile.js"></script>
+</body>
+</html>

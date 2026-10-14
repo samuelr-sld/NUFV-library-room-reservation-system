@@ -69,13 +69,13 @@
             <header class="header">
                 <h1 id="view-title">Overview</h1>
                 <div class="header-actions">
-                    <div class="profile-section">
+                    <a class="profile-section" href="../profile/profile.html" aria-label="My profile">
                         <i class="fas fa-user-circle"></i>
                         <div class="profile-info">
                             <div class="student-name">Administrator</div>
                             <div class="student-course">Administrator</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </header>
 
@@ -133,6 +133,9 @@
                             </label>
                             <label>Label
                                 <input id="f-label" autocomplete="off" placeholder="Seat 1" maxlength="80">
+                            </label>
+                            <label>Details (optional)
+                                <input id="f-description" autocomplete="off" placeholder="Window side, has projector" maxlength="200">
                             </label>
                             <label id="f-capacity-wrap">Capacity
                                 <input id="f-capacity" type="number" min="1" max="50" step="1">

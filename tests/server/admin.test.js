@@ -426,3 +426,40 @@ test('failed administrative requests leave no audit trail and successful ones al
   assert.equal((await audits(rid)).length, 1);
   assert.ok((await audits(rid)).every((l) => l.actorUid === admin.uid));
 });
+
+// ---------------------------------------------------------------- details
+
+test('resources carry an optional description that is validated, editable and audited', async () => {
+  const rid = id('seat');
+  const made = await create(seat(rid, { description: '  Window side, power outlet  ' }));
+  assert.equal(made.body.resource.description, 'Window side, power outlet');
+  assert.equal((await create(seat(id('seat')))).body.resource.description, '', 'optional');
+
+  const res = await call(admin, 'PATCH', `/api/admin/resources/${rid}`, { description: 'Near the door' });
+  assert.equal(res.body.resource.description, 'Near the door');
+  const [log] = await audits(rid, 'resource.update');
+  assert.deepEqual(log.details.changes, { description: { from: 'Window side, power outlet', to: 'Near the door' } });
+  assert.equal((await call(admin, 'PATCH', `/api/admin/resources/${rid}`, { description: 'Near the door' })).status, 200);
+  assert.equal((await audits(rid, 'resource.update')).length, 1, 'no-op writes nothing');
+
+  for (const description of ['x'.repeat(201), 'a\nb', 5, null]) {
+    assert.equal((await call(admin, 'PATCH', `/api/admin/resources/${rid}`, { description })).status, 400, String(description));
+    assert.equal((await create(seat(id('seat'), { description }))).status, 400, String(description));
+  }
+});
+
+test('the number of resources is not fixed: new ones appear in the summary and the student room list', async () => {
+  const before = (await call(admin, 'GET', '/api/admin/summary')).body.byType['discussion-room'];
+  const rid = id('room');
+  await create({ id: rid, type: 'discussion-room', label: 'Room Z', capacity: 6, description: 'Whiteboard' });
+  const after = (await call(admin, 'GET', '/api/admin/summary')).body.byType['discussion-room'];
+  assert.equal(after.active, before.active + 1);
+
+  const reader = await t.actor({ role: 'student', emailVerified: true });
+  const room = (await call(reader, 'GET', '/api/reservations/rooms')).body.rooms.find((r) => r.id === rid);
+  assert.deepEqual(room, { id: rid, label: 'Room Z', description: 'Whiteboard', capacity: 6 });
+
+  await call(admin, 'PATCH', `/api/admin/resources/${rid}`, { status: 'maintenance' });
+  assert.equal((await call(admin, 'GET', '/api/admin/summary')).body.byType['discussion-room'].active, before.active);
+  assert.ok(!(await call(reader, 'GET', '/api/reservations/rooms')).body.rooms.some((r) => r.id === rid), 'inactive rooms are not offered');
+});
