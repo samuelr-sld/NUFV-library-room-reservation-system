@@ -133,7 +133,7 @@ Afterwards, clean up with section 8. Do not just delete the test student from Au
 
 ## 7. Testing Gmail notifications safely on one machine
 
-**The approval-link limitation.** Every approval email contains a link built from `APP_BASE_URL`, which in cloud-dev is `http://localhost:5001/approve/approve.html#<id>`. `localhost` means "the computer opening the link", so the link works only in a browser on **this** computer while `npm run serve:cloud` and `npm run server:cloud:mail` are running. Opened on a phone, another computer or after the servers are stopped, it fails to load. That is expected, not a bug. Do **not** work around it by pointing `APP_BASE_URL` at a LAN address or a tunnel: that publishes the site (out of scope), is blocked by the API's CORS allowlist, and `127.0.0.1` binding would not accept it anyway.
+**The approval-link limitation.** Every approval email contains a link built from `APP_BASE_URL`, which in cloud-dev is `http://localhost:5001/approve/approve.html#<id>`. `localhost` means "the computer opening the link", so the link works only in a browser on **this** computer while `npm run serve:cloud` and `npm run server:cloud:mail` are running. Opened on a phone, another computer or after the servers are stopped, it fails to load. That is expected, not a bug. Do **not** work around it with a tunnel or by editing `APP_BASE_URL` alone: that publishes the site (out of scope), is blocked by the API's CORS allowlist, and `127.0.0.1` binding would not accept it anyway. The only supported LAN setup is the opt-in test at the end of this section.
 
 **Procedure.**
 1. **Rehearse with the sink, no email at all.** `npm run server:cloud`, run the whole approval chain (checklist 10–13) and read the notice and the one-time code at `http://localhost:3001/api/dev/mail/view`. This proves the logic against the real project before any message leaves the machine.
@@ -142,6 +142,13 @@ Afterwards, clean up with section 8. Do not just delete the test student from Au
 4. **Restart with Gmail on purpose:** stop the sink server, `npm run cloud:check` (it must print `Application mail LIVE through smtp.gmail.com as …`), then `npm run server:cloud:mail`. The sink viewer disappears in this mode, by design.
 5. Submit one reservation, and open the approver's email **in a browser on this computer** (Gmail in the web browser works; the mail app on a phone does not for the link). Request the code on the approval page; it arrives as a second email. Finish the chain, then stop the server.
 6. Expect a handful of messages against Gmail's roughly 500 a day. Revoke the App Password when done (`docs/gmail-smtp-setup.md`).
+
+**Exception: same-Wi-Fi approver test (opt-in, testing only).** To let an approver vote from their own phone, put the laptop, the approver and anyone else involved on **one network you control** (your phone's hotspot or home Wi-Fi, never campus or public Wi-Fi). Everything is plain http, and the API (real data) becomes reachable by every device on that network.
+1. `ipconfig`: note this laptop's IPv4 address on the hotspot adapter (e.g. `192.168.43.10`; iPhone hotspots use `172.20.10.x`).
+2. Create `server/.env.cloud.lan` (git-ignored) with `LISTEN_LAN=yes`, `APP_BASE_URL=http://<that IP>:5001` and `CORS_ORIGINS=http://localhost:5001,http://<that IP>:5001`.
+3. Start `npm run serve:cloud:lan` and `npm run server:cloud:mail:lan`. On first start Windows asks whether Node may accept connections: allow **Private networks** only.
+4. Students and the administrator keep using `http://localhost:5001` on the laptop. Only the approval page works at the LAN address (sign-in pages refuse it on purpose).
+5. If the laptop's IP changes, update the file, restart, and use Admin > Resend for links already emailed. Afterwards stop both servers and delete `server/.env.cloud.lan`; the plain commands are local-only again.
 
 Firebase Authentication emails (verify, reset) are sent by Firebase regardless of this section and are never affected by the sink/Gmail choice.
 

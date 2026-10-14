@@ -139,6 +139,10 @@ export function loadConfig(env, { forServer = true } = {}) {
   const outboxPollMs = pollMs('OUTBOX_POLL_SECONDS', 10, 60, 5, 3600);
   const sweepPollMs = pollMs('SWEEP_POLL_SECONDS', 60, 300, 30, 3600);
 
-  // cloud-dev holds real accounts and a live sink viewer: listen on this machine only, never on the network.
-  return { mode, production, cloud, projectId, port, host: cloudDev ? '127.0.0.1' : undefined, corsOrigins, voucherKey, approvalKey, appBaseUrl, trustProxy, outboxPollMs, sweepPollMs, mail: mailConfig(env, production) };
+  // cloud-dev holds real accounts and a live sink viewer: listen on this machine only, unless an operator opts in to a
+  // same-Wi-Fi approver test with LISTEN_LAN=yes (docs/cloud-setup.md section 7). Plain http: for a network you control only.
+  if (env.LISTEN_LAN !== undefined && env.LISTEN_LAN !== 'yes') fail('LISTEN_LAN must be "yes" or unset.');
+  if (env.LISTEN_LAN && !cloudDev) fail('LISTEN_LAN is only for cloud-dev.');
+  const host = cloudDev ? (env.LISTEN_LAN ? '0.0.0.0' : '127.0.0.1') : undefined;
+  return { mode, production, cloud, projectId, port, host, corsOrigins, voucherKey, approvalKey, appBaseUrl, trustProxy, outboxPollMs, sweepPollMs, mail: mailConfig(env, production) };
 }

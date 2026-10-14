@@ -39,8 +39,12 @@ export function configFor(hostname, port = '') {
 export const PROD_API_BASE = '';
 const LOCAL_API_BASE = 'http://localhost:3000';
 
+// Private IPv4 (home Wi-Fi, phone hotspots). Only the approver page works there: configFor still refuses it, so no sign-in.
+const LAN_HOST = /^(10\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}|192\.168\.\d{1,3})\.\d{1,3}$/;
+
 export function apiBaseFor(hostname, port = '') {
   if (port === CLOUD_DEV.sitePort && hostname === 'localhost') return `http://localhost:${CLOUD_DEV.apiPort}`;
+  if (port === CLOUD_DEV.sitePort && LAN_HOST.test(hostname)) return `http://${hostname}:${CLOUD_DEV.apiPort}`; // same-Wi-Fi approver test
   if (LOCAL_HOSTS.includes(hostname) && port !== CLOUD_DEV.sitePort) return LOCAL_API_BASE;
   if (PROD_HOSTS.includes(hostname) && PROD_API_BASE) return PROD_API_BASE;
   throw new Error(`The API is not configured for host "${hostname}".`);

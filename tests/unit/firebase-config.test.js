@@ -62,3 +62,14 @@ test('127.0.0.1:5001 is refused rather than guessed: not an authorized Auth doma
   assert.throws(() => apiBaseFor('127.0.0.1', '5001'), /not configured/);
   assert.equal(devMailUrl('127.0.0.1', '5001'), null);
 });
+
+test('a private network address on :5001 reaches the API on the same machine (same-Wi-Fi approver test) and nothing else', () => {
+  for (const host of ['192.168.43.10', '172.20.10.2', '10.0.0.5', '192.168.137.1']) {
+    assert.equal(apiBaseFor(host, '5001'), `http://${host}:3001`, host);
+    assert.throws(() => configFor(host, '5001'), /not configured/, host); // no sign-in pages over the LAN
+    assert.equal(devMailUrl(host, '5001'), null, host);
+  }
+  for (const [host, port] of [['192.168.43.10', '5000'], ['192.168.43.10', ''], ['8.8.8.8', '5001'], ['172.32.0.1', '5001'], ['192.168.1.5.evil.com', '5001']]) {
+    assert.throws(() => apiBaseFor(host, port), /not configured/, `${host}:${port}`);
+  }
+});

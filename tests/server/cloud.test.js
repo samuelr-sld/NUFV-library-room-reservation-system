@@ -31,6 +31,12 @@ test('cloud-dev: the real project, local-only API, own port and origin, applicat
   assert.equal(loadConfig({ ...CLOUD, PORT: '3055' }).port, 3055);
 });
 
+test('cloud-dev listens on the network only with LISTEN_LAN=yes, and only in cloud-dev', () => {
+  assert.equal(loadConfig({ ...CLOUD, LISTEN_LAN: 'yes' }).host, '0.0.0.0');
+  for (const v of ['', 'no', 'true', 'YES']) bad({ ...CLOUD, LISTEN_LAN: v }, /LISTEN_LAN must be/);
+  bad({ NODE_ENV: 'development', FIREBASE_PROJECT_ID: 'demo-nufv', FIREBASE_AUTH_EMULATOR_HOST: '127.0.0.1:9099', FIRESTORE_EMULATOR_HOST: '127.0.0.1:8080', LISTEN_LAN: 'yes' }, /only for cloud-dev/);
+});
+
 test('the emulator modes are not cloud and still need the emulators', () => {
   const dev = { NODE_ENV: 'development', FIREBASE_PROJECT_ID: 'demo-nufv', FIREBASE_AUTH_EMULATOR_HOST: '127.0.0.1:9099', FIRESTORE_EMULATOR_HOST: '127.0.0.1:8080' };
   assert.deepEqual([loadConfig(dev).cloud, loadConfig(dev).host], [false, undefined]);
