@@ -22,7 +22,7 @@ export async function loadReservations() {
   state.textContent = 'Loading reservations...';
   try {
     const { reservations } = await apiFetch(`/api/admin/reservations?status=${encodeURIComponent(status)}`);
-    $('#res-rows').replaceChildren(...reservations.map((r) => h('tr', {},
+    $('#res-rows').replaceChildren(...reservations.map((r) => h('tr', { 'data-id': r.id, class: r.id === openId ? 'selected' : '' },
       h('td', {}, `${r.student.fullName} (${r.student.studentNumber || '—'})`),
       h('td', {}, r.room.label),
       h('td', {}, `${r.date} ${r.startTime}–${r.endTime}`),
@@ -36,6 +36,17 @@ export async function loadReservations() {
     state.className = 'state error';
     state.textContent = err.message;
   }
+}
+
+// From a popup: show the pending queue and open this reservation through the detail endpoint, so it opens even when it is not
+// in the (filtered, limited) list. `id` null just shows the queue.
+export async function showReservation(id) {
+  openId = id;
+  $('#res-status').value = 'pending';
+  $('#res-detail').hidden = true;
+  if (location.hash === '#reservations') await loadReservations(); // otherwise the route change loads it
+  else location.hash = '#reservations';
+  if (id) await openDetail(id);
 }
 
 async function openDetail(id) {

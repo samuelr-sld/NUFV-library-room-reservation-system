@@ -143,6 +143,8 @@ async function submitOnce({ db, config, uid, body, now }) {
       participantCount: booking.participantCount, participants: booking.participants, purpose: booking.purpose, notes: booking.notes,
       status: 'pending', currentStep: 0, workflow, approvals: [], slotKeys: keys,
       createdAt: ts(now), submittedAt: ts(now), updatedAt: ts(now), endedAt: null, endReason: null, decision: null,
+      // Admin popup events (see adminAlerts): alertAt is the one field the poll queries; no steps before the admin = already final.
+      alertSubmittedAt: ts(now), alertAt: ts(now), ...(workflow.steps[0].type === 'admin' ? { alertFinalAt: ts(now) } : {}),
     };
     const deadline = deadlineFor(r, now, workflow.stepHours);
     r.stepDeadline = ts(deadline);
@@ -251,7 +253,7 @@ async function transition(tx, { db, config, id, now, op, actor, expectedStep, co
       const challengeId = nextStep.type === 'external'
         ? createChallenge(db, tx, { reservationId: id, stepIndex: next, stepLabel: nextStep.label, email: nextStep.email, deadline, now, config, summary: summaryOf(r, r.studentName, r.studentNumber) })
         : null;
-      tx.update(snap.ref, { ...base, currentStep: next, stepDeadline: ts(deadline), activeChallengeId: challengeId, approvals: [...r.approvals, entry] });
+      tx.update(snap.ref, { ...base, currentStep: next, stepDeadline: ts(deadline), activeChallengeId: challengeId, approvals: [...r.approvals, entry], ...(nextStep.type === 'admin' ? { alertFinalAt: ts(now), alertAt: ts(now) } : {}) });
       record('approved');
       return { changed: true, status: 'pending', currentStep: next };
     }
@@ -440,6 +442,26 @@ export async function adminList({ db, config, now, status = 'pending', limit = 1
   // Ordered in the query so the page is the right 100 (soonest pending first, latest history first), not an arbitrary 100.
   const snaps = await db.collection('reservations').where('status', '==', status).orderBy('startsAt', status === 'pending' ? 'asc' : 'desc').limit(limit).get();
   return snaps.docs.map((d) => ({ ...presentStudent(d), student: { fullName: d.get('studentName'), studentNumber: d.get('studentNumber') }, awaitingFinalApproval: d.get('status') === 'pending' && d.get('workflow').steps[d.get('currentStep')].type === 'admin' }));
+}
+
+// Popup events for administrators. Two preserved events per reservation (submitted, final); one indexed query on alertAt.
+// Deliberately no expiry sweep and no student details: this is polled every ~20 s.
+export async function adminAlerts({ db, now, since }) {
+  if (since === undefined) return { serverTime: now.toISOString(), events: [] }; // first load: never any history, no read
+  const from = new Date(since);
+  if (typeof since !== 'string' || Number.isNaN(from.getTime())) throw invalid('since must be an ISO date-time.');
+  const snaps = await db.collection('reservations').where('alertAt', '>=', ts(from)).orderBy('alertAt').limit(20).get();
+  const fromMs = from.getTime();
+  const events = [];
+  for (const d of snaps.docs) {
+    if (d.get('status') !== 'pending') continue;
+    const [sub, fin] = [d.get('alertSubmittedAt'), d.get('alertFinalAt')];
+    const base = { id: d.id, room: d.get('room').label, date: d.get('localDate'), startTime: d.get('startTime'), endTime: d.get('endTime') };
+    // Reaching the admin step at submission is one moment: report only "final".
+    if (sub && sub.toMillis() >= fromMs && !(fin && fin.toMillis() === sub.toMillis())) events.push({ ...base, type: 'submitted', at: iso(sub) });
+    if (fin && fin.toMillis() >= fromMs) events.push({ ...base, type: 'final', at: iso(fin) });
+  }
+  return { serverTime: now.toISOString(), events: events.sort((a, b) => a.at.localeCompare(b.at)) };
 }
 
 // ------------------------------------------------------------------ administrator QR verification

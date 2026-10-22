@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { HttpError } from '../errors.js';
-import { adminList, adminReservation, applyReservation, resendNotice } from '../reservations.js';
+import { adminAlerts, adminList, adminReservation, applyReservation, resendNotice } from '../reservations.js';
 import { getWorkflow, saveWorkflow } from '../workflow.js';
 
 // Administrator side, mounted under /api/admin (behind authenticate + requireAdmin). Admins configure the approval
@@ -19,6 +19,8 @@ export function adminReservationsRouter({ db, config, clock, mailer }) {
 
   router.get('/approval-workflow', async (req, res) => res.json(await getWorkflow(db)));
   router.put('/approval-workflow', async (req, res) => res.json(await saveWorkflow({ db, uid: req.user.uid, body: body(req) })));
+
+  router.get('/notifications', async (req, res) => res.json(await adminAlerts({ db, now: clock(), since: req.query.since })));
 
   router.get('/reservations', async (req, res) => res.json({ reservations: await adminList({ db, config, now: clock(), status: req.query.status ?? 'pending' }) }));
   router.get('/reservations/:id', async (req, res) => {

@@ -4,7 +4,8 @@ import { guardResult } from '../../js/guard.js';
 import { apiFetch } from '../../js/api.js';
 import { h, say } from '../../js/dom.js';
 import { initTicketsView, stopScanner } from './tickets-view.js';
-import { initReservationViews, loadReservations, loadWorkflow } from './reservations-view.js';
+import { initReservationViews, loadReservations, loadWorkflow, showReservation } from './reservations-view.js';
+import { initNotifications } from './notifications.js';
 import { initOpsView, loadOps } from './ops-view.js';
 import { initAuditView, loadAudit } from './audit-view.js';
 
@@ -306,6 +307,7 @@ if (guardResult.status === 'allow') {
   initReservationViews();
   initOpsView();
   initAuditView();
+  initNotifications({ open: showReservation });
   window.addEventListener('hashchange', route);
   route();
 }
