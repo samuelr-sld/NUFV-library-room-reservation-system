@@ -2,6 +2,59 @@
 
 Discussion room reservation system: static HTML/CSS/vanilla JS frontend (`public/`, served by Firebase Hosting), a Node.js + Express 5 API (`server/`), Firebase Authentication and Cloud Firestore. Development runs entirely on the Firebase Emulator Suite with the `demo-nufv` project; nothing in development or tests touches production Firebase.
 
+## Prerequisites
+
+| Requirement | Version | Notes |
+|---|---|---|
+| Node.js | 20.6 or newer (developed on 24) | Includes npm. The scripts use `node --env-file` and `node --test`. |
+| Firebase CLI (global compiler/tooling) | `firebase-tools` 15.x | `npm install -g firebase-tools`; provides the Auth/Firestore/Hosting emulators. |
+| Java JDK | 21 or newer | Required by the Firestore emulator (see "One-time: Java 21" below). |
+| Google Chrome | Current | Only for the optional browser checks (`npm run test:browser` etc.) and the camera scanner. |
+| Internet access | | The pages load the Firebase SDK from Google's CDN. |
+
+No language compiler is needed: the frontend is plain HTML/CSS/JavaScript and the API runs directly on Node.js.
+
+## VS Code Extensions Required
+
+| Extension | Publisher | Why |
+|---|---|---|
+| Live Preview (`ms-vscode.live-server`) | Microsoft | Optional: quick look at static pages in `public/`. The full system must be opened through `http://localhost:5000` (the API and Firebase emulators are needed for sign-in and data). |
+
+VS Code's built-in JavaScript/Node.js support is enough; no language extension or debugger add-on is required. Everything else runs from the integrated terminal.
+
+## Execution Steps (VS Code Integrated Terminal)
+
+Open the project folder in VS Code, then open the terminal with `` Ctrl + ` `` (PowerShell).
+
+**Quickest: the one-command academic demo**
+
+```powershell
+# 1. Use Java 21 for this terminal session (see "One-time: Java 21" if `java -version` is not 21.x)
+$env:JAVA_HOME = 'C:\Program Files\Microsoft\jdk-21.0.12.101-hotspot'
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+
+# 2. Install dependencies (first time only)
+npm install
+
+# 3. Start emulators, API, website, email sink and demo accounts together
+npm run demo
+```
+
+Open <http://localhost:5000/login%20page/login.html>. Every demo account uses the password `demo1234`. Press `Ctrl + C` in the terminal to stop. The classroom walkthrough with accounts and steps is in [docs/demo-guide.md](docs/demo-guide.md).
+
+**Manual start (two terminals)**
+
+```powershell
+npm run emulators   # terminal 1 (Ctrl + Shift + ` opens a second one)
+npm run server      # terminal 2, API on http://localhost:3000
+```
+
+**Run the tests**
+
+```powershell
+npm test            # stop the demo first; both use the same emulator ports
+```
+
 ## Local development on Windows
 
 ### One-time: Java 21 (required by the Firestore emulator)
